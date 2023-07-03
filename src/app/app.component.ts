@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'denloy-POS';
+  currentYear = new Date().getFullYear();
 
   showList: boolean = false;
 
