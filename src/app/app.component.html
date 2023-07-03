@@ -5,44 +5,39 @@
     <mat-toolbar color="primary">
       Denloy Investments
     </mat-toolbar>
+    
+    <a href="" class="p-2 d-block">
+      <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">home</mat-icon>
+      <span class="">Home</span>
+    </a>
 
-    <mat-list role="list">
-      <mat-list-item role="listitem">
-        <mat-icon>
-          <span class="material-icons-outlined align-middle">
-          home
-          </span>
-        </mat-icon>
-        <span>Home</span>
-      </mat-list-item>
+    <a href="#" class="p-2 d-block my-1" (click)="showProductList()">
+      <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">edit_note</mat-icon>
+      <span class="">Products</span>
+    </a>
 
-      <mat-list-item role="listitem">
-        <mat-icon>
-          <span class="material-icons-outlined align-middle">
-            edit_note
-          </span>
-        </mat-icon>
-        <span>Products</span>
-      </mat-list-item>
+    <!-- products sub list -->
+    <div class="productList" *ngIf="showList">
+      <a href="" class="p-2 d-block my-1">
+        <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">view_list</mat-icon>
+        <span class="">List Products</span>
+      </a>
+  
+      <a [routerLink]="['products/add']" routerLinkActive="active-link" class="p-2 d-block my-1">
+        <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">playlist_add</mat-icon>
+        <span class="">Add Product</span>
+      </a>
+    </div>
 
-      <mat-list-item role="listitem">
-        <mat-icon>
-          <span class="material-icons-outlined align-middle">
-            bar_chart
-          </span>
-        </mat-icon>
-        <span>Sales</span>
-      </mat-list-item>
+    <a href="" class="p-2 d-block my-1">
+      <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">bar_chart</mat-icon>
+      <span class="">Sales</span>
+    </a>
 
-      <mat-list-item role="listitem">
-        <mat-icon>
-          <span class="material-icons-outlined align-middle">
-            request_quote
-          </span>
-        </mat-icon>
-        <span>Invoice</span>
-      </mat-list-item>
-    </mat-list>
+    <a href="" class="p-2 d-block my-1">
+      <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">request_quote</mat-icon>
+      <span class="">Invoice</span>
+    </a>
 
   </mat-drawer>
 

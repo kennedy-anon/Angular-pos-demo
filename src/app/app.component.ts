@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'denloy-POS';
+
+  showList: boolean = false;
+
+  showProductList() {
+    this.showList = !this.showList;
+  }
 }

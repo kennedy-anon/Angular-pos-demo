@@ -7,11 +7,27 @@ mat-drawer-content {
 }
 
 .material-icons-outlined {
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .width-spacer {
     flex: 1 1 auto;
 }
 
+mat-drawer a {
+    color: black;
+    text-decoration: none;
+}
 
+mat-drawer a:hover {
+    background: lightgray;
+}
+
+.productList {
+    margin-left: 2rem;
+    font-size: small;
+}
+
+.active-link {
+    font-weight: bold;
+}
