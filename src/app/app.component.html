@@ -1,14 +1,73 @@
 <mat-drawer-container class="main-container">
 
-  <mat-drawer mode="side" opened>
+  <!-- Navigation Bar -->
+  <mat-drawer #drawer mode="side" opened>
     <mat-toolbar color="primary">
       Denloy Investments
     </mat-toolbar>
+
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <mat-icon>
+          <span class="material-icons-outlined align-middle">
+          home
+          </span>
+        </mat-icon>
+        <span>Home</span>
+      </mat-list-item>
+
+      <mat-list-item role="listitem">
+        <mat-icon>
+          <span class="material-icons-outlined align-middle">
+            edit_note
+          </span>
+        </mat-icon>
+        <span>Products</span>
+      </mat-list-item>
+
+      <mat-list-item role="listitem">
+        <mat-icon>
+          <span class="material-icons-outlined align-middle">
+            bar_chart
+          </span>
+        </mat-icon>
+        <span>Sales</span>
+      </mat-list-item>
+
+      <mat-list-item role="listitem">
+        <mat-icon>
+          <span class="material-icons-outlined align-middle">
+            request_quote
+          </span>
+        </mat-icon>
+        <span>Invoice</span>
+      </mat-list-item>
+    </mat-list>
+
   </mat-drawer>
 
+  <!-- Main Content -->
   <mat-drawer-content>
     <mat-toolbar color="primary" class="">
-      Main Content
+      <button type="button" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>
+          <span class="">
+          menu
+          </span>
+        </mat-icon>
+      </button>
+
+      <span class="width-spacer"></span>
+
+      <button mat-button>
+        <mat-icon>point_of_sale</mat-icon>
+        POS
+      </button>
+
+      <button mat-button>
+        <mat-icon>account_circle</mat-icon>
+        Kennedy
+      </button>
     </mat-toolbar>
 
     <router-outlet></router-outlet>

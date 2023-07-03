@@ -7,6 +7,9 @@ import { AddProductsComponent } from './components/add-products/add-products.com
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSidenavModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
