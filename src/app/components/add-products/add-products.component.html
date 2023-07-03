@@ -1,3 +1,26 @@
-<mat-toolbar color="accent">
-
+<mat-toolbar>
+    Add New Product
 </mat-toolbar>
+
+<!-- Main body -->
+<div class="p-2">
+    <div class="container bg-white p-1">
+        <form ngNativeValidate (submit)="addProduct()">
+            <div class="form-group">
+                <label for="name">Product Name*</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="" required>
+              </div>
+      
+              <div class="form-group my-3">
+                <label for="min_SP">Min Selling Price</label>
+                <input type="number" class="form-control" name="min_SP" id="min_SP" aria-describedby="helpId" placeholder="">
+                <small id="helpId" class="form-text text-muted">You can leave it blank and set later.</small>
+              </div>
+
+              <div style="text-align: right;">
+                <button id="submitProduct" type="submit" mat-button class="px-3">Save Product</button>
+              </div>
+        </form>
+        
+    </div>    
+</div>
