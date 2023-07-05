@@ -12,6 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { AddMultipleProductsComponent } from './components/add-multiple-products/add-multiple-products.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AddMultipleProductsComponent } from './components/add-multiple-products
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

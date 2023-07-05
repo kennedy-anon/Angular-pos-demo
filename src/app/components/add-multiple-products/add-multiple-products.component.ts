@@ -9,12 +9,14 @@ import { AddMultipleProductsService } from 'src/app/services/add-multiple-produc
 export class AddMultipleProductsComponent {
   productName !: string;
   products : any = [];
+  displayedColumns = ['no', 'product_name', 'actions'];
 
   constructor(private addMultipleProductsService: AddMultipleProductsService) {}
 
   // add products to the table
   addProducts() {
     this.addMultipleProductsService.addProduct(this.productName);
+    this.productName = '';
   }
 
   ngOnInit(): void {
