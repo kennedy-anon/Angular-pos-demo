@@ -24,8 +24,13 @@
       </a>
   
       <a [routerLink]="['products/add']" routerLinkActive="active-link" class="p-2 d-block my-1">
-        <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">playlist_add</mat-icon>
+        <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">add_circle_outline</mat-icon>
         <span class="">Add Product</span>
+      </a>
+
+      <a [routerLink]="['products/add-multiple']" routerLinkActive="active-link" class="p-2 d-block my-1">
+        <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">playlist_add</mat-icon>
+        <span class="">Add Multipe Products</span>
       </a>
     </div>
 
@@ -42,7 +47,7 @@
   </mat-drawer>
 
   <!-- Main Content -->
-  <mat-drawer-content>
+  <mat-drawer-content class="d-flex flex-column min-vh-100">
     <mat-toolbar color="primary">
       <button type="button" mat-icon-button (click)="drawer.toggle()">
         <mat-icon>
@@ -67,7 +72,7 @@
 
     <router-outlet></router-outlet>
 
-    <footer class="p-3">    
+    <footer class="px-3 mt-auto">    
       <p style="font-size: smaller;">Denloy Investments POS | Copyright &copy; {{ currentYear }} All rights reserved.</p>
     </footer>
 
