@@ -19,6 +19,16 @@ export class AddMultipleProductsService {
     this.productList.next(this.products);
   }
 
+  updateProduct(oldProductName: string, newProductName: string) {
+    this.products.map((item:any, index:any) => {
+      if (item === oldProductName) {
+        this.products[index] = newProductName;
+      }
+    })
+
+    this.productList.next(this.products);
+  }
+
   deleteProduct(product: any) {
     this.products.map((item:any, index:any) => {
       if (item === product) {

@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { AddMultipleProductsService } from 'src/app/services/add-multiple-products.service';
 
 @Component({
   selector: 'app-edit-product-name',
@@ -10,9 +11,14 @@ export class EditProductNameComponent {
   oldProductname !: string;
   productName !: string;
 
-  constructor(public dialogRef: MatDialogRef<EditProductNameComponent>, @Inject(MAT_DIALOG_DATA) public data: {oldProductname: string}) {}
+  constructor(public dialogRef: MatDialogRef<EditProductNameComponent>, private addMultipleProductsService: AddMultipleProductsService, @Inject(MAT_DIALOG_DATA) public data: {oldProductname: string}) {}
 
-  onNoClick(): void {
+  onCancelClick(): void {
+    this.dialogRef.close();
+  }
+
+  updateProduct(product: any) {
+    this.addMultipleProductsService.updateProduct(this.oldProductname, product);
     this.dialogRef.close();
   }
 
