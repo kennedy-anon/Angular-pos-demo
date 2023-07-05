@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProductNameComponent } from 'src/app/dialogs/edit-product-name/edit-product-name.component';
 import { AddMultipleProductsService } from 'src/app/services/add-multiple-products.service';
+import { SnackBarCustomComponent } from '../snack-bar-custom/snack-bar-custom.component';
 
 @Component({
   selector: 'app-add-multiple-products',
@@ -9,6 +10,7 @@ import { AddMultipleProductsService } from 'src/app/services/add-multiple-produc
   styleUrls: ['./add-multiple-products.component.css']
 })
 export class AddMultipleProductsComponent {
+  @ViewChild('_snackbar') _snackbar !: SnackBarCustomComponent;
   productName !: string;
   products : any = [];
   displayedColumns = ['no', 'product_name', 'actions'];
@@ -36,6 +38,8 @@ export class AddMultipleProductsComponent {
   // delete row
   deleteProduct(product: any) {
     this.addMultipleProductsService.deleteProduct(product);
+    // this._snackBar.open(product + " deleted.");
+    this._snackbar.showSuccessMessage(product + " deleted.");
   }
 
   // editing product name

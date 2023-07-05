@@ -15,13 +15,16 @@ import { AddMultipleProductsComponent } from './components/add-multiple-products
 import { MatTableModule } from '@angular/material/table';
 import { EditProductNameComponent } from './dialogs/edit-product-name/edit-product-name.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SnackBarCustomComponent } from './components/snack-bar-custom/snack-bar-custom.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddProductsComponent,
     AddMultipleProductsComponent,
-    EditProductNameComponent
+    EditProductNameComponent,
+    SnackBarCustomComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     FormsModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
