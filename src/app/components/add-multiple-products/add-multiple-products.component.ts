@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EditProductNameComponent } from 'src/app/dialogs/edit-product-name/edit-product-name.component';
 import { AddMultipleProductsService } from 'src/app/services/add-multiple-products.service';
 
 @Component({
@@ -11,7 +13,20 @@ export class AddMultipleProductsComponent {
   products : any = [];
   displayedColumns = ['no', 'product_name', 'actions'];
 
-  constructor(private addMultipleProductsService: AddMultipleProductsService) {}
+  constructor(private addMultipleProductsService: AddMultipleProductsService, public dialog: MatDialog) {}
+
+  openDialog(product: any): void {
+    const dialogRef = this.dialog.open(EditProductNameComponent, {
+      height: '200px',
+      width: '600px',
+      data: {oldProductname: product},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+  }
 
   // add products to the table
   addProducts() {
@@ -22,6 +37,11 @@ export class AddMultipleProductsComponent {
   // delete row
   deleteProduct(product: any) {
     this.addMultipleProductsService.deleteProduct(product);
+  }
+
+  // editing product name
+  editProduct(product:any) {
+    this.openDialog(product);
   }
 
   ngOnInit(): void {

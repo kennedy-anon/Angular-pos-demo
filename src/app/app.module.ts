@@ -13,12 +13,15 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { AddMultipleProductsComponent } from './components/add-multiple-products/add-multiple-products.component';
 import { MatTableModule } from '@angular/material/table';
+import { EditProductNameComponent } from './dialogs/edit-product-name/edit-product-name.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddProductsComponent,
-    AddMultipleProductsComponent
+    AddMultipleProductsComponent,
+    EditProductNameComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatButtonModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
