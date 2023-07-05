@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AddMultipleProductsService } from 'src/app/services/add-multiple-products.service';
 
 @Component({
   selector: 'app-add-multiple-products',
@@ -7,10 +8,21 @@ import { Component } from '@angular/core';
 })
 export class AddMultipleProductsComponent {
   productName !: string;
+  products : any = [];
+
+  constructor(private addMultipleProductsService: AddMultipleProductsService) {}
 
   // add products to the table
   addProducts() {
-    console.log(this.productName);
+    this.addMultipleProductsService.addProduct(this.productName);
+  }
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.addMultipleProductsService.getProducts().subscribe(res=>{
+      this.products = res;
+    })
   }
 
 }
