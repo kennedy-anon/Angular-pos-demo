@@ -1,0 +1,17 @@
+mat-toolbar {
+    font-size: medium;
+}
+
+.container {
+    border-radius: 1rem;
+}
+
+form {
+    margin: 2rem;
+}
+
+#addProduct {
+    background: #1E1E1E;
+    color: #D9D9D9;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}

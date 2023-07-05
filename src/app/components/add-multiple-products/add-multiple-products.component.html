@@ -1,0 +1,25 @@
+<mat-toolbar>
+    Add Multiple Products
+</mat-toolbar>
+
+<!-- Main body -->
+<div class="p-2">
+    <!-- form for adding products -->
+    <div class="container bg-white p-1">
+        <form ngNativeValidate (submit)="addProducts()" class="row">
+            <div class="form-group col-sm-9">
+                <label for="productName">Product Name*</label>
+                <input type="text" class="form-control" [(ngModel)]="productName" name="productName" id="name" placeholder="" required>
+            </div>
+
+            <div class="col-sm-3  text-center pt-3">
+                <button id="addProduct" type="submit" mat-button class="px-3">Add</button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- table for displaying products -->
+    <div class="container bg-white mt-1">
+        products
+    </div>
+</div>
