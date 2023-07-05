@@ -19,11 +19,16 @@ export class AddMultipleProductsComponent {
     this.productName = '';
   }
 
+  // delete row
+  deleteProduct(product: any) {
+    this.addMultipleProductsService.deleteProduct(product);
+  }
+
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.addMultipleProductsService.getProducts().subscribe(res=>{
-      this.products = res;
+      this.products = [...res].reverse();
     })
   }
 
