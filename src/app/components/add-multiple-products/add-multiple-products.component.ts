@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProductNameComponent } from 'src/app/dialogs/edit-product-name/edit-product-name.component';
 import { AddMultipleProductsService } from 'src/app/services/add-multiple-products.service';
-import { SnackBarCustomComponent } from '../snack-bar-custom/snack-bar-custom.component';
+import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 
 @Component({
   selector: 'app-add-multiple-products',
@@ -10,12 +10,11 @@ import { SnackBarCustomComponent } from '../snack-bar-custom/snack-bar-custom.co
   styleUrls: ['./add-multiple-products.component.css']
 })
 export class AddMultipleProductsComponent {
-  @ViewChild('_snackbar') _snackbar !: SnackBarCustomComponent;
   productName !: string;
   products : any = [];
   displayedColumns = ['no', 'product_name', 'actions'];
 
-  constructor(private addMultipleProductsService: AddMultipleProductsService, public dialog: MatDialog) {}
+  constructor(private addMultipleProductsService: AddMultipleProductsService, public dialog: MatDialog, private _snackBar: SnackBarCustomService) {}
 
   openDialog(product: any): void {
     const dialogRef = this.dialog.open(EditProductNameComponent, {
@@ -38,8 +37,7 @@ export class AddMultipleProductsComponent {
   // delete row
   deleteProduct(product: any) {
     this.addMultipleProductsService.deleteProduct(product);
-    // this._snackBar.open(product + " deleted.");
-    this._snackbar.showSuccessMessage(product + " deleted.");
+    this._snackBar.showSuccessMessage(product + " deleted.");
   }
 
   // editing product name

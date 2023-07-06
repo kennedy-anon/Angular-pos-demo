@@ -1,17 +1,15 @@
-import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-@Component({
-  selector: 'app-snack-bar-custom',
-  templateUrl: './snack-bar-custom.component.html',
-  styleUrls: ['./snack-bar-custom.component.css']
+@Injectable({
+  providedIn: 'root'
 })
-export class SnackBarCustomComponent {
+export class SnackBarCustomService {
 
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(private _snackBar: MatSnackBar) { }
 
   showSuccessMessage(message: any) {
-    this._snackBar.open(message, 'X', {
+    return this._snackBar.open(message, 'X', {
       duration: 3000,
       verticalPosition: 'top',
       horizontalPosition: 'center',
@@ -20,7 +18,7 @@ export class SnackBarCustomComponent {
   }
 
   showErrorMessage(message: any) {
-    this._snackBar.open(message, 'X', {
+    return this._snackBar.open(message, 'X', {
       duration: 3000,
       verticalPosition: 'top',
       horizontalPosition: 'center',
