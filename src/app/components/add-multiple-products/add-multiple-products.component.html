@@ -8,7 +8,9 @@
     <div class="container bg-white p-1">
         <form ngNativeValidate (submit)="addProducts()" class="row">
             <div class="form-group col-sm-9">
-                <label for="productName">Product Name*</label>
+                <label for="productName">Product Name* <mat-icon class="align-middle fs-18" matTooltip="Simply press 'enter' after each entry for quick Entry."><span class="material-icons-outlined">
+                    info
+                    </span></mat-icon></label>
                 <input type="text" class="form-control" [(ngModel)]="productName" name="productName" id="name" placeholder="" required>
             </div>
 
