@@ -17,6 +17,7 @@ import { EditProductNameComponent } from './dialogs/edit-product-name/edit-produ
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     AddProductsComponent,
     AddMultipleProductsComponent,
     EditProductNameComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
