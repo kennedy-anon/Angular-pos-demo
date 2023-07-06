@@ -45,6 +45,17 @@ export class AddMultipleProductsComponent {
     this.openDialog(product);
   }
 
+  // clear the whole table
+  clearProducts() {
+    this.addMultipleProductsService.clearProducts();
+    this._snackBar.showSuccessMessage("Products cleared.");
+  }
+
+  // save products
+  saveProducts() {
+    
+  }
+
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.

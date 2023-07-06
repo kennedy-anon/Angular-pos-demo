@@ -15,3 +15,8 @@ form {
     color: #D9D9D9;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
+
+.table-container {
+    max-height: 600px;
+    overflow: auto;
+}
