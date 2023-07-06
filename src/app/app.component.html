@@ -34,6 +34,29 @@
       </a>
     </div>
 
+    <a class="p-2 d-block my-1" (click)="showPurchaseList()">
+      <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">shopping_cart</mat-icon>
+      <span class="">Purchases</span>
+    </a>
+
+    <!-- purchases sub list -->
+    <div class="productList" *ngIf="expandPurchase">
+      <a href="" class="p-2 d-block my-1">
+        <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">view_list</mat-icon>
+        <span class="">List Purchases</span>
+      </a>
+  
+      <a [routerLink]="['products/add']" routerLinkActive="active-link" class="p-2 d-block my-1">
+        <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">add_circle_outline</mat-icon>
+        <span class="">Add Purchase</span>
+      </a>
+
+      <a [routerLink]="['products/add-multiple']" routerLinkActive="active-link" class="p-2 d-block my-1">
+        <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">playlist_add</mat-icon>
+        <span class="">Add Multipe Purchases</span>
+      </a>
+    </div>
+
     <a href="" class="p-2 d-block my-1">
       <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">bar_chart</mat-icon>
       <span class="">Sales</span>
