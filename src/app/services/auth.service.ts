@@ -7,6 +7,7 @@ import { Observable, catchError, map, of, throwError } from 'rxjs';
 })
 export class AuthService {
   apiUrl : string = "http://localhost:8000/api/";
+  private userDetail: any;
 
   constructor(private http: HttpClient) { }
 
@@ -26,6 +27,7 @@ export class AuthService {
   logoutService() {
     localStorage.removeItem('access');
     localStorage.removeItem('refresh');
+    this.userDetail = undefined;
   }
 
   // check if the user is logged in
@@ -61,6 +63,19 @@ export class AuthService {
       return of(false);
     }
 
+  }
+
+  // retrieve user details after login
+  getUserDetails(token: string) {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  
+    return this.http.get(`${this.apiUrl}auth/user/`, { headers })
+    .pipe(map(res => {
+      this.userDetail = res;
+      return res;
+    }));
   }
 
   // save tokens

@@ -89,7 +89,7 @@
   
         <button mat-button [matMenuTriggerFor]="account">
           <mat-icon>account_circle</mat-icon>
-          Kennedy
+          <span>{{ userDetail?.username }}</span>
         </button>
 
         <mat-menu #account="matMenu" class="account-menu">

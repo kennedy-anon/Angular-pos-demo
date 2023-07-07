@@ -12,6 +12,7 @@ export class HomeLayoutComponent {
   currentYear = new Date().getFullYear();
   showList: boolean = false;
   expandPurchase: boolean = false;
+  userDetail : any;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -29,6 +30,16 @@ export class HomeLayoutComponent {
   logout() {
     this.authService.logoutService();
     this.router.navigate(['/login']);
+  }
+
+  ngOnInit(): void {
+    const access_token = localStorage.getItem('access');
+
+    if (access_token) {
+      this.authService.getUserDetails(access_token).subscribe(res => {
+        this.userDetail = res;
+      })
+    }
   }
 
 }
