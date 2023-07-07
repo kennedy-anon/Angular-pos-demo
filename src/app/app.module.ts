@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LoginComponent } from './components/login/login.component';
+import { HomeLayoutComponent } from './components/home-layout/home-layout.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { LoginComponent } from './components/login/login.component';
     AddMultipleProductsComponent,
     EditProductNameComponent,
     LoginComponent,
+    HomeLayoutComponent,
   ],
   imports: [
     BrowserModule,
