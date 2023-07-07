@@ -22,6 +22,12 @@ export class AuthService {
     );
   }
 
+  // logout
+  logoutService() {
+    localStorage.removeItem('access');
+    localStorage.removeItem('refresh');
+  }
+
   // save tokens
   saveJWTtokens(response: any) {
     localStorage.setItem('access', response.body.access);
