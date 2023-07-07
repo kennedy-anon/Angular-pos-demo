@@ -78,6 +78,23 @@ export class AuthService {
     }));
   }
 
+  // get Access groups for the user
+  getAccessGroups() {
+    const token = localStorage.getItem('access');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.apiUrl}auth/user/access-groups/`, { headers });
+  }
+
+  // return the access groups
+  accessGroupsService(): Observable<any> {
+    return this.getAccessGroups().pipe(map(res => {
+      return res;
+    }));
+  }
+
   // save tokens
   saveJWTtokens(response: any) {
     localStorage.setItem('access', response.body.access);
