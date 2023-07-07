@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, throwError } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +28,69 @@ export class AuthService {
     localStorage.removeItem('refresh');
   }
 
+  // check if the user is logged in
+  isLoggedIn(): Observable<boolean> {
+    const access_token = localStorage.getItem('access');
+    const refresh_token = localStorage.getItem('refresh');
+
+    if (access_token) {
+      // check if the token is valid
+      return this.verifyAccessToken(access_token).pipe(map((res: HttpResponse<any>) => {
+        return true; // token is valid
+      }), catchError((err: any) => {
+        // token not valid, try refreshing it
+        if (refresh_token && err.error.code === 'token_not_valid') {
+          return this.refreshToken(refresh_token).pipe(map((res: HttpResponse<any>) => {
+            // token refreshed successfully
+            const new_access_token = res.body.access;
+            localStorage.setItem('access', new_access_token); // save new token
+
+            return true;
+          }), catchError((err: any) => {
+            // token could not be refreshed
+            return of(false);
+          }));
+        } else {
+          // Token is not valid and cannot be refreshed, return false
+          return of(false);
+        }
+      })
+      );
+    } else {
+      // No access token, return false
+      return of(false);
+    }
+
+  }
+
   // save tokens
   saveJWTtokens(response: any) {
     localStorage.setItem('access', response.body.access);
     localStorage.setItem('refresh', response.body.refresh);
 
     return "Login Successful.";
+  }
+
+  // verify acces tokens
+  verifyAccessToken(access_token: string): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.append('Content-type', 'application/json');
+    const token = {
+      "token": access_token
+    }
+
+    return this.http.post(`${this.apiUrl}token/verify/`, token, {headers: headers, observe: 'response'});
+  }
+
+  // refreshing token
+  refreshToken(refresh_token: string): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.append('Content-type', 'application/json');
+    const refresh = {
+      "refresh": refresh_token
+    }
+
+    return this.http.post(`${this.apiUrl}token/refresh/`, refresh, {headers: headers, observe: 'response'});
   }
 
   // handling login errors

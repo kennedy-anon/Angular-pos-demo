@@ -4,10 +4,11 @@ import { AddProductsComponent } from './components/add-products/add-products.com
 import { AddMultipleProductsComponent } from './components/add-multiple-products/add-multiple-products.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeLayoutComponent } from './components/home-layout/home-layout.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: HomeLayoutComponent, children: [
+  {path: '', component: HomeLayoutComponent, canActivate:[authGuard], children: [
     {path: 'products/add', component: AddProductsComponent},
     {path: 'products/add-multiple', component: AddMultipleProductsComponent},
   ]},
