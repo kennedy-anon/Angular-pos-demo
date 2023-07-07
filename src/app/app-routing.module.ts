@@ -5,11 +5,11 @@ import { AddMultipleProductsComponent } from './components/add-multiple-products
 import { LoginComponent } from './components/login/login.component';
 import { HomeLayoutComponent } from './components/home-layout/home-layout.component';
 import { authGuard } from './guards/auth.guard';
-import { accessLevelGuard } from './guards/access-level.guard';
+import { adminGuard } from './guards/access-level.guard';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: HomeLayoutComponent, canActivate:[authGuard, accessLevelGuard], data: {accessLevels: ['SystemAdmin']}, children: [
+  {path: '', component: HomeLayoutComponent, canActivate:[authGuard, adminGuard], children: [
     {path: 'products/add', component: AddProductsComponent},
     {path: 'products/add-multiple', component: AddMultipleProductsComponent},
   ]},
