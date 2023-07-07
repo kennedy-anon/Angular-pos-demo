@@ -8,12 +8,12 @@
         <form ngNativeValidate (submit)="addProduct()">
             <div class="form-group">
                 <label for="name">Product Name*</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="" required>
+                <input type="text" class="form-control" [(ngModel)]="name" name="name" id="name" placeholder="" required>
               </div>
       
               <div class="form-group my-3">
                 <label for="min_SP">Min Selling Price</label>
-                <input type="number" class="form-control" name="min_SP" id="min_SP" aria-describedby="helpId" placeholder="">
+                <input type="number" class="form-control" [(ngModel)]="min_SP" name="min_SP" id="min_SP" aria-describedby="helpId" placeholder="">
                 <small id="helpId" class="form-text text-muted">You can leave it blank and set later.</small>
               </div>
 
