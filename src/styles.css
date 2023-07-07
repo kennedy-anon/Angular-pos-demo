@@ -24,3 +24,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --mdc-snackbar-container-color: var(--delete-color);
     --mat-mdc-snack-bar-button-color: black;
 }
+
+.mat-mdc-menu-panel.account-menu {
+    background: #E8E8E8;
+}
