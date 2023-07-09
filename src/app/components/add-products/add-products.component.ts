@@ -25,9 +25,10 @@ export class AddProductsComponent {
         this.clearFields();
       }),
       error: (err =>{
-        console.log(err);
         if (err.status == 400) {
           this._snackBar.showErrorMessage(err.error.detail);
+        } else if (err.status == 403) {
+          this._snackBar.showErrorMessage("Session expired. Kindly login again.");
         }
       })
     });

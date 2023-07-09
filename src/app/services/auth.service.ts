@@ -92,7 +92,10 @@ export class AuthService {
   accessGroupsService(): Observable<any> {
     return this.getAccessGroups().pipe(map(res => {
       return res;
-    }));
+    }), catchError((err: any) => {
+      return this.accessGroupsService(); // loops a few times(after testing - 3 times) while waiting token to be refreshed
+    })
+    );
   }
 
   // save tokens
