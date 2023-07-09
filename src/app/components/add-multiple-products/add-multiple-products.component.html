@@ -19,6 +19,13 @@
             </div>
         </form>
     </div>
+
+    <!-- displays save complete message -->
+    <div class="container bg-success text-white p-1 mt-1 d-flex" *ngIf="saveComplete">
+        <p class="mt-2 my-auto" style="margin-left: .5rem;">Products saved successfully. Any products remaining on the table are duplicates.</p>
+        <span class="width-spacer"></span>
+        <button mat-icon-button color="accent" (click)="hideSaveMessage()"><mat-icon>close</mat-icon></button>
+    </div>
     
     <!-- table for displaying products -->
     <div class="container bg-white mt-1 p-3 table-container">
