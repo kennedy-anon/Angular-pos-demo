@@ -21,6 +21,8 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeLayoutComponent } from './components/home-layout/home-layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
+import { AddPurchasesComponent } from './components/add-purchases/add-purchases.component';
+import { NgAisModule } from 'angular-instantsearch';
 
 @NgModule({
   declarations: [
@@ -30,8 +32,10 @@ import { MatMenuModule } from '@angular/material/menu';
     EditProductNameComponent,
     LoginComponent,
     HomeLayoutComponent,
+    AddPurchasesComponent,
   ],
   imports: [
+    NgAisModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     MatSidenavModule,

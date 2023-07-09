@@ -28,3 +28,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-menu-panel.account-menu {
     background: #E8E8E8;
 }
+
+.ais-SearchBox { margin-bottom: 1em }
