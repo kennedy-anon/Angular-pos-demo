@@ -12,10 +12,21 @@ const searchClient = algoliasearch(
   styleUrls: ['./add-purchases.component.css']
 })
 export class AddPurchasesComponent {
+  product_name !: string;
+  quantity !: number;
+  purchase_costs !: number;
+
+  displayedColumns = ['no', 'product_name', 'purchase_quantity', 'purchase_costs', 'actions'];
+  purchases : any = [];
+
   config = {
     indexName: 'dev_DenloyPOS_dev_DenloyPOS',
     searchClient
   };
 
+  // add purchase to the table
+  addPurchase() {
+
+  }
 
 }
