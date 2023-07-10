@@ -34,8 +34,6 @@ export class AddPurchasesComponent {
     };
     this.product_name = product.product_name;
     this.isDisabled = true;
-    console.log(this.selectedProduct.product_id);
-    console.log(product);
   }
 
   // add purchase to the table
