@@ -1,3 +1,17 @@
 mat-toolbar {
     font-size: medium;
 }
+
+.position-absolute {
+    z-index: 500;
+}
+
+@media (max-width: 576px) {
+    .sm-margin {
+        margin-top: .5rem;
+    }
+
+    .position-absolute {
+        width: 92%;
+    }
+}

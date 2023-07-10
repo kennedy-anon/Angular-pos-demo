@@ -5,12 +5,12 @@
 <!-- Search box -->
 <div class="container py-1">
     <ais-instantsearch [config]="config">
-        <ais-search-box [placeholder]="'Type product name...'"></ais-search-box>
-        <ais-hits>
-          <ng-template let-hits="hits" *ngIf="false">
+        <ais-search-box [placeholder]="'Type product name...'" #searchBox></ais-search-box>
+        <ais-hits class="position-absolute" *ngIf="searchBox.state.query">
+          <ng-template let-hits="hits">
             <ol class="ais-Hits-list">
               <li *ngFor="let hit of hits.slice(0, 5)" class="ais-Hits-item">
-               {{hit.product_name}}
+               <a (click)="selectProduct(hit)">{{hit.product_name}}</a>
               </li>
             </ol>
           </ng-template>
@@ -23,17 +23,17 @@
 <div class="container">
   <form ngNativeValidate (submit)="addPurchase()">
     <div class="row">
-      <div class="form-group col-sm-6">
+      <div class="form-group col-sm-6 sm-margin">
         <label for="product_name">Product Name</label>
-        <input type="text" class="form-control" [(ngModel)]="product_name" name="product_name" id="product_name" placeholder="" required>
+        <input type="text" class="form-control" [(ngModel)]="product_name" name="product_name" id="product_name" placeholder="" [disabled]="isDisabled" required>
       </div>
 
-      <div class="form-group col-sm-3">
+      <div class="form-group col-sm-3 sm-margin">
         <label for="quantity">Purchase Quantity</label>
         <input type="number" class="form-control" [(ngModel)]="quantity" name="quantity" id="quantity" placeholder="" required>
       </div>
   
-      <div class="form-group col-sm-3">
+      <div class="form-group col-sm-3 sm-margin">
         <label for="purchase_costs">Total Purchase Costs</label>
         <input type="number" class="form-control" [(ngModel)]="purchase_costs" name="purchase_costs" id="purchase_costs" placeholder="" required>
       </div>
@@ -47,7 +47,7 @@
 </div>
 
 <!-- purchases table -->
-<div class="container my-3">
+<div class="container my-3 overflow-auto">
   <table mat-table [dataSource]="purchases" class="mat-elevation-z8">
 
     <!-- No. Column -->

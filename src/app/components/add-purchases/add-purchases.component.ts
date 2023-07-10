@@ -15,6 +15,9 @@ export class AddPurchasesComponent {
   product_name !: string;
   quantity !: number;
   purchase_costs !: number;
+  showSearchList : boolean = true;
+  isDisabled : boolean = false; // disables product name input field
+  selectedProduct : any;
 
   displayedColumns = ['no', 'product_name', 'purchase_quantity', 'purchase_costs', 'actions'];
   purchases : any = [];
@@ -23,6 +26,17 @@ export class AddPurchasesComponent {
     indexName: 'dev_DenloyPOS_dev_DenloyPOS',
     searchClient
   };
+
+  // selected product
+  selectProduct(product: any) {
+    this.selectedProduct = {
+      product_id: product.product_id
+    };
+    this.product_name = product.product_name;
+    this.isDisabled = true;
+    console.log(this.selectedProduct.product_id);
+    console.log(product);
+  }
 
   // add purchase to the table
   addPurchase() {
