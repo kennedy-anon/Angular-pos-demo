@@ -22,3 +22,18 @@ export const adminGuard = () => {
   }));
 
 };
+
+export const cashierGuard = () => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  return authService.accessGroupsService().pipe(map(res => {
+    if (compareAccessLevels("Cashier", res)) {
+      return true;
+    } else {
+      router.navigate(['/login']);
+      return false;
+    }
+  }));
+
+};
