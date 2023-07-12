@@ -1,1 +1,82 @@
-<p>pos works!</p>
+<div class="main-container">
+    <div>
+        <mat-toolbar>
+            <span>Denloy Investments</span>
+
+            <div class="container">
+                <ais-instantsearch [config]="config">
+                <ais-search-box [placeholder]="'Type product name...'" #searchBox></ais-search-box>
+                <ais-hits class="position-absolute" *ngIf="searchBox.state.query">
+                  <ng-template let-hits="hits">
+                    <ol class="ais-Hits-list">
+                      <li *ngFor="let hit of hits.slice(0, 5)" class="ais-Hits-item">
+                       <a (click)="selectProduct(hit)">{{hit.product_name}}</a>
+                      </li>
+                    </ol>
+                  </ng-template>
+                </ais-hits>
+              </ais-instantsearch>
+            </div>
+
+            <span>Account</span>
+        </mat-toolbar>
+    </div>
+
+    <!-- products table -->
+    <div class="container my-3 overflow-auto">
+        <table mat-table [dataSource]="products" class="mat-elevation-z8">
+
+            <!-- No. Column -->
+            <ng-container matColumnDef="no">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+            </ng-container>
+        
+            <!--Product Name Column -->
+            <ng-container matColumnDef="product_name">
+              <th mat-header-cell *matHeaderCellDef>Product Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.product_name}} </td>
+            </ng-container>
+        
+            <!--Quantity Column -->
+            <ng-container matColumnDef="units">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element"> {{element.units}} </td>
+            </ng-container>
+        
+            <!--Unit Price -->
+            <ng-container matColumnDef="unit_price">
+              <th mat-header-cell *matHeaderCellDef>Unit Price </th>
+              <td mat-cell *matCellDef="let element"> {{element.unit_price}} </td>
+            </ng-container>
+
+            <!--Sub Total -->
+            <ng-container matColumnDef="sub_total">
+                <th mat-header-cell *matHeaderCellDef>Sub Total </th>
+                <td mat-cell *matCellDef="let element"> {{element.sub_total}} </td>
+            </ng-container>
+        
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="accent"><mat-icon><span class="material-icons-outlined">
+                    edit
+                    </span></mat-icon></button>
+                    &nbsp;&nbsp;
+                <button mat-icon-button color="warn"><mat-icon><span class="material-icons-outlined">
+                    delete
+                    </span></mat-icon></button>
+              </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-row"></tr>
+          </table>
+    </div>
+
+    <!-- footer/ action bar -->
+    <div>
+
+    </div>
+</div>
