@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import algoliasearch from 'algoliasearch/lite';
 import { EditPurchaseComponent } from 'src/app/dialogs/edit-purchase/edit-purchase.component';
+import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 
 const searchClient = algoliasearch(
   'HQC4LP3GHT',
@@ -30,7 +31,7 @@ export class AddPurchasesComponent {
     searchClient
   };
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private _snackBar: SnackBarCustomService) {}
 
   openDialog(purchase: any): void {
     const dialogRef = this.dialog.open(EditPurchaseComponent, {
@@ -39,6 +40,8 @@ export class AddPurchasesComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined ){
+        //update purchases
+        this._snackBar.showSuccessMessage(result.product_name + ' updated successfully.');
       }
     });
   }
@@ -68,12 +71,22 @@ export class AddPurchasesComponent {
       if (item.product_id == product.product_id) {
         this.purchases.splice(index, 1);
         this.purchases = [...this.purchases];
+        this._snackBar.showSuccessMessage(product.product_name + " deleted.");
       }
     })
   }
 
   editPurchase(purchase: any) {
     this.openDialog(purchase);
+  }
+
+  savePurchases() {
+    console.log(this.purchases);
+  }
+
+  clearPurchases() {
+    this.purchases = [];
+    this._snackBar.showSuccessMessage('Purchases cleared.');
   }
 
 }

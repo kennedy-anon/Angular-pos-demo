@@ -15,6 +15,10 @@ mat-toolbar {
     font-size: 18px;
 }
 
+.ml-3 {
+    margin-left: 1rem;
+}
+
 .mat-row:nth-child(even){
     background-color: #ffffff;
 }
