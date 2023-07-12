@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import algoliasearch from 'algoliasearch/lite';
 import { EditPurchaseComponent } from 'src/app/dialogs/edit-purchase/edit-purchase.component';
+import { PurchasesService } from 'src/app/services/purchases.service';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 
 const searchClient = algoliasearch(
@@ -31,7 +32,7 @@ export class AddPurchasesComponent {
     searchClient
   };
 
-  constructor(public dialog: MatDialog, private _snackBar: SnackBarCustomService) {}
+  constructor(public dialog: MatDialog, private _snackBar: SnackBarCustomService, private purchasesService: PurchasesService) {}
 
   openDialog(purchase: any): void {
     const dialogRef = this.dialog.open(EditPurchaseComponent, {
@@ -81,7 +82,18 @@ export class AddPurchasesComponent {
   }
 
   savePurchases() {
-    console.log(this.purchases);
+    this.purchasesService.savePurchases(this.purchases).subscribe({
+      next: (res =>{
+        res.status == 201 ? this._snackBar.showSuccessMessage((res.body as any)?.detail): undefined;
+        this.purchases = [];
+      }),
+      error: (err => {
+        if (err.status == 403) {
+          this._snackBar.showErrorMessage("Session expired. Kindly login again.");
+        }
+        console.log(err);
+      })
+    });
   }
 
   clearPurchases() {
