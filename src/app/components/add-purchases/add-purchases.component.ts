@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import algoliasearch from 'algoliasearch/lite';
 
 const searchClient = algoliasearch(
@@ -12,10 +12,10 @@ const searchClient = algoliasearch(
   styleUrls: ['./add-purchases.component.css']
 })
 export class AddPurchasesComponent {
+  @ViewChild('searchBox') searchBox: any;
   product_name !: string;
   quantity !: number;
   purchase_costs !: number;
-  showSearchList : boolean = true;
   isDisabled : boolean = false; // disables product name input field
   selectedProduct : any;
 
@@ -34,6 +34,7 @@ export class AddPurchasesComponent {
     };
     this.product_name = product.product_name;
     this.isDisabled = true;
+    this.searchBox.state.clear();
   }
 
   // add purchase to the table
