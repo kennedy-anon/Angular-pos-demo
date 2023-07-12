@@ -22,10 +22,6 @@ export class PurchasesService {
 
   // save purchase history
   savePurchases(purchases: any) {
-    purchases.forEach((obj: any) => {
-      delete obj.product_name;
-    });
-
     var headers = this.setHttpHeaders();
     return this.http.post(`${this.apiUrl}products/new-stock/`, purchases, {headers: headers, observe: 'response'})
     .pipe(map(res => res));
