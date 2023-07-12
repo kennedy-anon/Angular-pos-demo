@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import algoliasearch from 'algoliasearch/lite';
+import { EditPurchaseComponent } from 'src/app/dialogs/edit-purchase/edit-purchase.component';
 
 const searchClient = algoliasearch(
   'HQC4LP3GHT',
@@ -27,6 +29,19 @@ export class AddPurchasesComponent {
     indexName: 'dev_DenloyPOS_dev_DenloyPOS',
     searchClient
   };
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(purchase: any): void {
+    const dialogRef = this.dialog.open(EditPurchaseComponent, {
+      data: {selectedPurchase: purchase},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined ){
+      }
+    });
+  }
 
   // selected product
   selectProduct(product: any) {
@@ -58,7 +73,7 @@ export class AddPurchasesComponent {
   }
 
   editPurchase(purchase: any) {
-    
+    this.openDialog(purchase);
   }
 
 }
