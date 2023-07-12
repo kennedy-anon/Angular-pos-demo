@@ -13,11 +13,12 @@ const searchClient = algoliasearch(
 })
 export class AddPurchasesComponent {
   @ViewChild('searchBox') searchBox: any;
-  product_name !: string;
-  quantity !: number;
-  purchase_costs !: number;
-  isDisabled : boolean = false; // disables product name input field
-  selectedProduct : any;
+  selectedProduct : any = {
+    product_name: '',
+    product_id: '',
+    units: '',
+    buying_price: ''
+  };
 
   displayedColumns = ['no', 'product_name', 'purchase_quantity', 'purchase_costs', 'actions'];
   purchases : any = [];
@@ -29,17 +30,35 @@ export class AddPurchasesComponent {
 
   // selected product
   selectProduct(product: any) {
-    this.selectedProduct = {
-      product_id: product.product_id
-    };
-    this.product_name = product.product_name;
-    this.isDisabled = true;
+    this.selectedProduct.product_name = product.product_name;
+    this.selectedProduct.product_id = product.product_id;
     this.searchBox.state.clear();
   }
 
   // add purchase to the table
   addPurchase() {
+    this.purchases = [...this.purchases, this.selectedProduct];
+    this.selectedProduct = {
+      product_name: '',
+      product_id: '',
+      units: '',
+      buying_price: ''
+    };
 
+  }
+
+  // delete product
+  deletePurchase(product: any) {
+    this.purchases.map((item:any, index:any) => {
+      if (item.product_id == product.product_id) {
+        this.purchases.splice(index, 1);
+        this.purchases = [...this.purchases];
+      }
+    })
+  }
+
+  editPurchase(purchase: any) {
+    
   }
 
 }

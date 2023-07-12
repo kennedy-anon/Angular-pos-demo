@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { AddPurchasesComponent } from './components/add-purchases/add-purchases.component';
 import { NgAisModule } from 'angular-instantsearch';
+import { EditPurchaseComponent } from './dialogs/edit-purchase/edit-purchase.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NgAisModule } from 'angular-instantsearch';
     LoginComponent,
     HomeLayoutComponent,
     AddPurchasesComponent,
+    EditPurchaseComponent,
   ],
   imports: [
     NgAisModule.forRoot(),
