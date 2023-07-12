@@ -24,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AddPurchasesComponent } from './components/add-purchases/add-purchases.component';
 import { NgAisModule } from 'angular-instantsearch';
 import { EditPurchaseComponent } from './dialogs/edit-purchase/edit-purchase.component';
+import { PosComponent } from './components/pos/pos.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { EditPurchaseComponent } from './dialogs/edit-purchase/edit-purchase.com
     HomeLayoutComponent,
     AddPurchasesComponent,
     EditPurchaseComponent,
+    PosComponent,
   ],
   imports: [
     NgAisModule.forRoot(),

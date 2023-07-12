@@ -7,9 +7,11 @@ import { HomeLayoutComponent } from './components/home-layout/home-layout.compon
 import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/access-level.guard';
 import { AddPurchasesComponent } from './components/add-purchases/add-purchases.component';
+import { PosComponent } from './components/pos/pos.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'pos', component: PosComponent},
   {path: '', component: HomeLayoutComponent, canActivate:[authGuard, adminGuard], children: [
     {path: 'products/add', component: AddProductsComponent, canActivate:[authGuard, adminGuard]},
     {path: 'products/add-multiple', component: AddMultipleProductsComponent, canActivate:[authGuard, adminGuard]},
