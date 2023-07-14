@@ -1,7 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import algoliasearch from 'algoliasearch/lite';
 import { ConfirmClearComponent } from 'src/app/dialogs/confirm-clear/confirm-clear.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 
 const searchClient = algoliasearch(
   'HQC4LP3GHT',
@@ -33,7 +36,7 @@ export class PosComponent {
     amount: 0
   }
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private authService: AuthService, private router: Router, private _snackBar: SnackBarCustomService) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ConfirmClearComponent, {
@@ -91,7 +94,9 @@ export class PosComponent {
   }
 
   logout() {
-
+    this.authService.logoutService();
+    this.router.navigate(['/login']);
+    this._snackBar.showSuccessMessage('Logged out successfully.');
   }
 
 }
