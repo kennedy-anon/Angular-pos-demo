@@ -1,0 +1,19 @@
+<div class="d-flex mb-0">
+    <h5 mat-dialog-title>Confirm</h5>
+
+    <span class="width-spacer"></span>
+    
+    <button mat-icon-button (click)="onCancelClick()" color="accent" class="mt-2 mx-3"><mat-icon><span class="material-icons-outlined">
+        close
+    </span></mat-icon></button>
+</div>
+
+<div mat-dialog-content>
+    <p>Are you sure you want to clear?</p>
+</div>
+
+<div mat-dialog-actions class="px-3">
+    <button mat-stroked-button (click)="onCancelClick()">Cancel</button>
+    <span class="width-spacer"></span>
+    <button id="update" mat-raised-button (click)="clear()" cdkFocusInitial class="mx-3" color="warn">Clear</button>
+</div>

@@ -25,6 +25,7 @@ import { AddPurchasesComponent } from './components/add-purchases/add-purchases.
 import { NgAisModule } from 'angular-instantsearch';
 import { EditPurchaseComponent } from './dialogs/edit-purchase/edit-purchase.component';
 import { PosComponent } from './components/pos/pos.component';
+import { ConfirmClearComponent } from './dialogs/confirm-clear/confirm-clear.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { PosComponent } from './components/pos/pos.component';
     AddPurchasesComponent,
     EditPurchaseComponent,
     PosComponent,
+    ConfirmClearComponent,
   ],
   imports: [
     NgAisModule.forRoot(),

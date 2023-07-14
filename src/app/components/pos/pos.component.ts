@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import algoliasearch from 'algoliasearch/lite';
+import { ConfirmClearComponent } from 'src/app/dialogs/confirm-clear/confirm-clear.component';
 
 const searchClient = algoliasearch(
   'HQC4LP3GHT',
@@ -31,7 +33,18 @@ export class PosComponent {
     amount: 0
   }
 
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmClearComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'clear' ){
+        this.products = []; // clearing products
+      }
+    });
+  }
 
   // selected product
   selectProduct(product: any) {

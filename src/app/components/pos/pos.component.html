@@ -108,7 +108,7 @@
 
     <!-- footer/ action bar -->
     <footer style="text-align: right;" class="mt-auto py-3 container">
-      <button mat-raised-button color="warn" class="mx-5">Clear</button>
+      <button mat-raised-button (click)="openDialog()" color="warn" class="mx-5">Clear</button>
       <button type="submit" form="saleDetail" (click)="cashSale()" mat-raised-button color="primary">Cash</button>
     </footer>
 </div>
