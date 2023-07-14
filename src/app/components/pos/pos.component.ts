@@ -19,6 +19,7 @@ export class PosComponent {
   };
 
   displayedColumns = ['no', 'product_name', 'units', 'unit_price', 'sub_total', 'actions'];
+  footerColumns = ['unit_price', 'sub_total'];
   products : any = [];
 
   currentProduct : any = {
@@ -60,6 +61,11 @@ export class PosComponent {
   updateSubTotal(product: any) {
     const subTotal = Number(product.units) * Number(product.unitPrice);
     product.amount = isNaN(subTotal) ? 0 : subTotal;
+  }
+
+  // total for sub total
+  getTotal() {
+    return this.products.reduce((total: number, product: any) => total + product.amount, 0);
   }
 
   onSaleSubmit() {
