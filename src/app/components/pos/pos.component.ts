@@ -114,6 +114,11 @@ export class PosComponent {
     this.saleType = 'cash';
   }
 
+  // credit sale
+  creditSale() {
+    this.saleType = 'credit';
+  }
+
   clearFields() {
     this.products = [];
     this.saleType = '';
