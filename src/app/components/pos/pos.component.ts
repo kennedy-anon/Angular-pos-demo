@@ -27,7 +27,8 @@ export class PosComponent {
   footerColumns = ['unit_price', 'sub_total'];
   products : any = [];
   cash_received !: number;
-  change !: number;
+  change : number = 0;
+  saleType !: string;
 
   currentProduct : any = {
     product_name: '',
@@ -46,7 +47,7 @@ export class PosComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'clear' ){
-        this.products = []; // clearing products
+        this.clearFields(); // clearing products
       }
     });
   }
@@ -89,17 +90,35 @@ export class PosComponent {
   // calculate change
   calculateChange() {
     if (this.cash_received) {
+      this.saleType = 'cash';
       this.change = this.cash_received - this.getTotal();
     }
   }
 
+  // completing sale
   onSaleSubmit() {
-    console.log(this.products);
+    const saleDetail = {
+      products: this.products,
+      total: this.getTotal(),
+      saleType: this.saleType,
+      cash_received: this.cash_received,
+      change: this.change
+    }
+    
+    console.log(saleDetail);
+    this.clearFields(); // clearing fields
   }
 
   // cash sale
   cashSale() {
-    console.log(this.products);
+    this.saleType = 'cash';
+  }
+
+  clearFields() {
+    this.products = [];
+    this.saleType = '';
+    this.cash_received = 0;
+    this.change = 0;
   }
 
   logout() {
