@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import algoliasearch from 'algoliasearch/lite';
 
 const searchClient = algoliasearch(
@@ -12,6 +12,7 @@ const searchClient = algoliasearch(
   styleUrls: ['./pos.component.css']
 })
 export class PosComponent {
+  @ViewChild('searchBox') searchBox: any;
   config = {
     indexName: 'dev_DenloyPOS_dev_DenloyPOS',
     searchClient
@@ -23,7 +24,7 @@ export class PosComponent {
   currentProduct : any = {
     product_name: '',
     product_id: '',
-    units: '',
+    units: '1',
     unitPrice: '',
     min_selling_price: '',
     amount: ''
@@ -33,7 +34,35 @@ export class PosComponent {
 
   // selected product
   selectProduct(product: any) {
+    this.products = [...this.products, {
+      product_name: product.product_name,
+      product_id: product.product_id,
+      units: '1',
+      unitPrice: '',
+      min_selling_price: product.min_selling_price,
+      amount: ''
+    }];
 
+    this.searchBox.state.clear();
+  }
+
+  // delete product
+  deleteProduct(product: any) {
+    this.products.map((item:any, index:any) => {
+      if (item.product_id == product.product_id) {
+        this.products.splice(index, 1);
+        this.products = [...this.products];
+      }
+    })
+  }
+
+  onSaleSubmit() {
+    console.log(this.products);
+  }
+
+  // cash sale
+  cashSale() {
+    console.log(this.products);
   }
 
   logout() {
