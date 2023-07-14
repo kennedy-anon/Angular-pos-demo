@@ -61,7 +61,7 @@
               <td mat-cell *matCellDef="let element; let i=index">
 
                 <div class="form-group">
-                  <input type="number" [(ngModel)]="element.units" class="form-control" name="units_{{i}}" id="units_{{i}}" required>
+                  <input type="number" [(ngModel)]="element.units" (input)="updateSubTotal(element)" class="form-control" name="units_{{i}}" id="units_{{i}}" required>
                 </div>
                 
               </td>
@@ -73,7 +73,7 @@
               <td mat-cell *matCellDef="let element; let i=index">
 
                 <div class="form-group">
-                  <input type="number" [(ngModel)]="element.unitPrice" class="form-control" name="unitPrice_{{i}}" id="unitPrice_{{i}}" [min]="element.min_selling_price" required>
+                  <input type="number" [(ngModel)]="element.unitPrice" (input)="updateSubTotal(element)" class="form-control" name="unitPrice_{{i}}" id="unitPrice_{{i}}" [min]="element.min_selling_price" required>
                 </div>
 
               </td>

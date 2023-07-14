@@ -27,7 +27,7 @@ export class PosComponent {
     units: '1',
     unitPrice: '',
     min_selling_price: '',
-    amount: ''
+    amount: 0
   }
 
   constructor() {}
@@ -40,7 +40,7 @@ export class PosComponent {
       units: '1',
       unitPrice: '',
       min_selling_price: product.min_selling_price,
-      amount: ''
+      amount: 0
     }];
 
     this.searchBox.state.clear();
@@ -54,6 +54,12 @@ export class PosComponent {
         this.products = [...this.products];
       }
     })
+  }
+
+  // update subtotal
+  updateSubTotal(product: any) {
+    const subTotal = Number(product.units) * Number(product.unitPrice);
+    product.amount = isNaN(subTotal) ? 0 : subTotal;
   }
 
   onSaleSubmit() {
