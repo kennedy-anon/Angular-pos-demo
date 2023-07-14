@@ -1,8 +1,23 @@
 .main-container {
-    height: 100vh;
     background: #D9D9D9;
 }
 
 mat-toolbar {
     background: #D9D9D9; 
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.position-absolute {
+    z-index: 500;
+}
+
+.mat-row:nth-child(even){
+    background-color: #ffffff;
+}
+        
+.mat-row:nth-child(odd){
+    background-color: #f5f5f5;
 }

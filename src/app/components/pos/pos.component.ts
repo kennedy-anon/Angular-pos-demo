@@ -12,7 +12,6 @@ const searchClient = algoliasearch(
   styleUrls: ['./pos.component.css']
 })
 export class PosComponent {
-
   config = {
     indexName: 'dev_DenloyPOS_dev_DenloyPOS',
     searchClient
@@ -21,10 +20,23 @@ export class PosComponent {
   displayedColumns = ['no', 'product_name', 'units', 'unit_price', 'sub_total', 'actions'];
   products : any = [];
 
+  currentProduct : any = {
+    product_name: '',
+    product_id: '',
+    units: '',
+    unitPrice: '',
+    min_selling_price: '',
+    amount: ''
+  }
+
   constructor() {}
 
   // selected product
   selectProduct(product: any) {
+
+  }
+
+  logout() {
 
   }
 

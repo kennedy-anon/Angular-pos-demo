@@ -1,24 +1,40 @@
-<div class="main-container">
+<div class="main-container d-flex flex-column min-vh-100">
     <div>
         <mat-toolbar>
-            <span>Denloy Investments</span>
+          <span class="fs-18">Denloy Investments</span>
 
-            <div class="container">
-                <ais-instantsearch [config]="config">
-                <ais-search-box [placeholder]="'Type product name...'" #searchBox></ais-search-box>
-                <ais-hits class="position-absolute" *ngIf="searchBox.state.query">
-                  <ng-template let-hits="hits">
-                    <ol class="ais-Hits-list">
-                      <li *ngFor="let hit of hits.slice(0, 5)" class="ais-Hits-item">
-                       <a (click)="selectProduct(hit)">{{hit.product_name}}</a>
-                      </li>
-                    </ol>
-                  </ng-template>
-                </ais-hits>
-              </ais-instantsearch>
-            </div>
+          <div class="container mt-3">
+              <ais-instantsearch [config]="config">
+              <ais-search-box [placeholder]="'Type product name...'" #searchBox></ais-search-box>
+              <ais-hits class="position-absolute" *ngIf="searchBox.state.query">
+                <ng-template let-hits="hits">
+                  <ol class="ais-Hits-list">
+                    <li *ngFor="let hit of hits.slice(0, 5)" class="ais-Hits-item">
+                      <a (click)="selectProduct(hit)">{{hit.product_name}}</a>
+                    </li>
+                  </ol>
+                </ng-template>
+              </ais-hits>
+            </ais-instantsearch>
+          </div>
 
-            <span>Account</span>
+          <button mat-icon-button [matMenuTriggerFor]="account"><mat-icon><span class="material-icons-outlined">
+            account_circle
+            </span></mat-icon></button>
+
+            <mat-menu #account="matMenu" class="account-menu">
+              <ng-template matMenuContent>
+                <button mat-menu-item>
+                  <mat-icon>manage_accounts</mat-icon>
+                  <span>Account</span>
+                </button>
+    
+                <button mat-menu-item (click)="logout()">
+                  <mat-icon>logout</mat-icon>
+                  <span>Logout</span>
+                </button>
+              </ng-template>
+            </mat-menu>
         </mat-toolbar>
     </div>
 
@@ -76,7 +92,7 @@
     </div>
 
     <!-- footer/ action bar -->
-    <div>
-
-    </div>
+    <footer style="text-align: right;" class="mt-auto py-3 container">
+      <button mat-raised-button color="primary">Cash</button>
+    </footer>
 </div>
