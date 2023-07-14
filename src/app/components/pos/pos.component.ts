@@ -26,6 +26,8 @@ export class PosComponent {
   displayedColumns = ['no', 'product_name', 'units', 'unit_price', 'sub_total', 'actions'];
   footerColumns = ['unit_price', 'sub_total'];
   products : any = [];
+  cash_received !: number;
+  change !: number;
 
   currentProduct : any = {
     product_name: '',
@@ -82,6 +84,13 @@ export class PosComponent {
   // total for sub total
   getTotal() {
     return this.products.reduce((total: number, product: any) => total + product.amount, 0);
+  }
+
+  // calculate change
+  calculateChange() {
+    if (this.cash_received) {
+      this.change = this.cash_received - this.getTotal();
+    }
   }
 
   onSaleSubmit() {

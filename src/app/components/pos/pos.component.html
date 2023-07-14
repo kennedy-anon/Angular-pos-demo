@@ -86,7 +86,7 @@
                 <td mat-cell *matCellDef="let element">
                   {{element.amount}} 
                 </td>
-                <td mat-footer-cell *matFooterCellDef> {{ getTotal() | currency:'KSh ':'code' }} </td>
+                <td colspan="2" mat-footer-cell *matFooterCellDef> {{ getTotal() | currency:'KSh ':'code' }} </td>
             </ng-container>
         
             <!-- Actions Column -->
@@ -98,10 +98,44 @@
                     </span></mat-icon></button>
               </td>
             </ng-container>
+
+            <!-- cash received label -->
+            <ng-container matColumnDef="cash_received_label">
+              <td mat-footer-cell *matFooterCellDef colspan="4" style="text-align: right;">
+                Cash Received
+              </td>
+            </ng-container>
+
+            <!-- cash receieved field -->
+            <ng-container matColumnDef="cash_received">
+              <td mat-footer-cell *matFooterCellDef colspan="2">
+
+                <div class="form-group">
+                  <input type="number" [(ngModel)]="cash_received" class="form-control" name="cash_received" id="cash_received" [min]="getTotal()" required>
+                </div>
+
+              </td>
+            </ng-container>
+
+            <!-- change button -->
+            <ng-container matColumnDef="change_button">
+              <td mat-footer-cell *matFooterCellDef colspan="4" style="text-align: right;">
+                <button mat-stroked-button (click)="calculateChange()">Change</button>
+              </td>
+            </ng-container>
+
+            <!-- change amount -->
+            <ng-container matColumnDef="change_amount">
+              <td mat-footer-cell *matFooterCellDef colspan="2">
+                {{ change | currency:'KSh ':'code' }}
+              </td>
+            </ng-container>
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-row"></tr>
-            <tr mat-footer-row *matFooterRowDef="footerColumns"></tr>
+            <tr mat-footer-row *matFooterRowDef="footerColumns" class="total"></tr>
+            <tr mat-footer-row *matFooterRowDef="['cash_received_label', 'cash_received']" class="cashReceived"></tr>
+            <tr mat-footer-row *matFooterRowDef="['change_button', 'change_amount']"></tr>
           </table>
         </form>
     </div>
