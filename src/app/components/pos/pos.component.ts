@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import algoliasearch from 'algoliasearch/lite';
@@ -18,6 +19,7 @@ const searchClient = algoliasearch(
 })
 export class PosComponent {
   @ViewChild('searchBox') searchBox: any;
+  @ViewChild('posForm') form!: NgForm;
   config = {
     indexName: 'dev_DenloyPOS_dev_DenloyPOS',
     searchClient
@@ -41,13 +43,14 @@ export class PosComponent {
 
   constructor(public dialog: MatDialog, private authService: AuthService, private router: Router, private _snackBar: SnackBarCustomService) {}
 
+  // clearing form
   openDialog(): void {
     const dialogRef = this.dialog.open(ConfirmClearComponent, {
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'clear' ){
-        this.clearFields(); // clearing products
+        this.clearFields();
       }
     });
   }
@@ -90,7 +93,6 @@ export class PosComponent {
   // calculate change
   calculateChange() {
     if (this.cash_received) {
-      this.saleType = 'cash';
       this.change = this.cash_received - this.getTotal();
     }
   }
@@ -120,9 +122,9 @@ export class PosComponent {
   }
 
   clearFields() {
+    this.form.resetForm();
     this.products = [];
     this.saleType = '';
-    this.cash_received = 0;
     this.change = 0;
   }
 

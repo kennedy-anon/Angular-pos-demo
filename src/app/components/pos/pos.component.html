@@ -40,7 +40,7 @@
 
     <!-- products table -->
     <div class="container my-3 overflow-auto">
-        <form ngNativeValidate id="saleDetail" (ngSubmit)="onSaleSubmit()">
+        <form ngNativeValidate id="saleDetail" #posForm="ngForm" (ngSubmit)="onSaleSubmit()">
           <table mat-table [dataSource]="products" class="mat-elevation-z8">
 
             <!-- No. Column -->
@@ -120,7 +120,7 @@
             <!-- change button -->
             <ng-container matColumnDef="change_button">
               <td mat-footer-cell *matFooterCellDef colspan="4" style="text-align: right;">
-                <button mat-stroked-button (click)="calculateChange()">Change</button>
+                <button type="button" mat-stroked-button (click)="calculateChange()">Change</button>
               </td>
             </ng-container>
 
@@ -142,7 +142,7 @@
 
     <!-- footer/ action bar -->
     <footer style="text-align: right;" class="mt-auto py-3 container">
-      <button mat-raised-button (click)="openDialog()" color="warn" class="mx-5">Clear</button>
+      <button type="button" form="saleDetail" mat-raised-button (click)="openDialog()" color="warn" class="mx-5">Clear</button>
       <button type="submit" form="saleDetail" (click)="creditSale()" mat-raised-button class="mx-5">Credit</button>
       <button type="submit" form="saleDetail" (click)="cashSale()" mat-raised-button color="primary">Cash</button>
     </footer>
