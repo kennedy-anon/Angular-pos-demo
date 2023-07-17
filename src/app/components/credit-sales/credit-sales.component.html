@@ -9,6 +9,7 @@
         <ng-container matColumnDef="no">
           <th mat-header-cell *matHeaderCellDef> No. </th>
           <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+          <td colspan="3" mat-footer-cell *matFooterCellDef style="text-align: right;"> Total </td>
         </ng-container>
 
         <!--Date Column -->
@@ -26,19 +27,22 @@
         <!--Total Amount Column -->
         <ng-container matColumnDef="invoice_amount">
           <th mat-header-cell *matHeaderCellDef> Total Amount </th>
-          <td mat-cell *matCellDef="let element"> {{element.invoice_amount | currency:'':'code'}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.invoice_amount | currency:' ':'code'}} </td>
+          <td mat-footer-cell *matFooterCellDef> {{ getTotalAmount() | currency:' ':'code' }} </td>
         </ng-container>
     
         <!--Amount Paid Column -->
         <ng-container matColumnDef="invoice_paid">
           <th mat-header-cell *matHeaderCellDef>Amount Paid </th>
-          <td mat-cell *matCellDef="let element"> {{element.invoice_paid | currency:'':'code'}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.invoice_paid | currency:' ':'code'}} </td>
+          <td mat-footer-cell *matFooterCellDef> {{ getTotalPaid() | currency:' ':'code' }} </td>
         </ng-container>
 
         <!--Balance -->
         <ng-container matColumnDef="invoice_balance">
             <th mat-header-cell *matHeaderCellDef>Balance </th>
-            <td mat-cell *matCellDef="let element"> {{element.invoice_balance | currency:'':'code'}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.invoice_balance | currency:' ':'code'}} </td>
+            <td mat-footer-cell *matFooterCellDef> {{ getTotalBalance() | currency:' ':'code' }} </td>
         </ng-container>
 
         <!--Contact -->
@@ -52,16 +56,13 @@
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let element">
             <button mat-icon-button color="accent"><mat-icon><span class="material-icons-outlined">
-                edit
-                </span></mat-icon></button>
-                &nbsp;&nbsp;
-            <button mat-icon-button color="warn"><mat-icon><span class="material-icons-outlined">
-                delete
+                more_vert
                 </span></mat-icon></button>
           </td>
         </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-row"></tr>
+        <tr mat-footer-row *matFooterRowDef="['no', 'invoice_amount', 'invoice_paid', 'invoice_balance']" class="totals"></tr>
       </table>
 </div>
