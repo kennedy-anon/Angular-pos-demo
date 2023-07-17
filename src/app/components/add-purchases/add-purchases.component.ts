@@ -91,7 +91,6 @@ export class AddPurchasesComponent {
         if (err.status == 403) {
           this._snackBar.showErrorMessage("Session expired. Kindly login again.");
         }
-        console.log(err);
       })
     });
   }

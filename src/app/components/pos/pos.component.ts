@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import algoliasearch from 'algoliasearch/lite';
 import { ConfirmClearComponent } from 'src/app/dialogs/confirm-clear/confirm-clear.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { PosService } from 'src/app/services/pos.service';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 
 const searchClient = algoliasearch(
@@ -36,13 +37,13 @@ export class PosComponent {
   currentProduct : any = {
     product_name: '',
     product_id: '',
-    units: '1',
+    units: 1,
     unitPrice: '',
     min_selling_price: '',
     amount: 0
   }
 
-  constructor(public dialog: MatDialog, private authService: AuthService, private router: Router, private _snackBar: SnackBarCustomService) {}
+  constructor(public dialog: MatDialog, private authService: AuthService, private router: Router, private _snackBar: SnackBarCustomService, private posService: PosService) {}
 
   // clearing form
   openDialog(): void {
@@ -61,7 +62,7 @@ export class PosComponent {
     this.products = [...this.products, {
       product_name: product.product_name,
       product_id: product.product_id,
-      units: '1',
+      units: 1,
       unitPrice: '',
       min_selling_price: product.min_selling_price,
       amount: 0
@@ -110,8 +111,20 @@ export class PosComponent {
         change: this.change
       }
       
-      console.log(saleDetail);
-      this.clearFields(); // clearing fields
+      this.posService.saveSale(saleDetail.products).subscribe({
+        next: (res => {
+          res.status == 201 ? this._snackBar.showSuccessMessage((res.body as any)?.detail): undefined;
+          this.clearFields();
+        }),
+        error: (err => {
+          if (err.status == 403) {
+            this._snackBar.showErrorMessage("Session expired. Kindly login again.");
+          }
+          
+          console.log(err);
+        })
+      });
+
     }
   }
 
