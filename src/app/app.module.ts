@@ -27,6 +27,7 @@ import { EditPurchaseComponent } from './dialogs/edit-purchase/edit-purchase.com
 import { PosComponent } from './components/pos/pos.component';
 import { ConfirmClearComponent } from './dialogs/confirm-clear/confirm-clear.component';
 import { CreditSaleComponent } from './dialogs/credit-sale/credit-sale.component';
+import { CreditSalesComponent } from './components/credit-sales/credit-sales.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CreditSaleComponent } from './dialogs/credit-sale/credit-sale.component
     PosComponent,
     ConfirmClearComponent,
     CreditSaleComponent,
+    CreditSalesComponent,
   ],
   imports: [
     NgAisModule.forRoot(),
