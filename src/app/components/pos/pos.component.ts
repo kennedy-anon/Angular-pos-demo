@@ -31,6 +31,7 @@ export class PosComponent {
   cash_received !: number;
   change : number = 0;
   saleType !: string;
+  submitPOS : boolean = false;
 
   currentProduct : any = {
     product_name: '',
@@ -92,33 +93,38 @@ export class PosComponent {
 
   // calculate change
   calculateChange() {
-    if (this.cash_received) {
+    this.submitPOS = false;
+    if (this.cash_received && (this.cash_received >= this.getTotal())) {
       this.change = this.cash_received - this.getTotal();
     }
   }
 
   // completing sale
   onSaleSubmit() {
-    const saleDetail = {
-      products: this.products,
-      total: this.getTotal(),
-      saleType: this.saleType,
-      cash_received: this.cash_received,
-      change: this.change
+    if (this.submitPOS) {
+      const saleDetail = {
+        products: this.products,
+        total: this.getTotal(),
+        saleType: this.saleType,
+        cash_received: this.cash_received,
+        change: this.change
+      }
+      
+      console.log(saleDetail);
+      this.clearFields(); // clearing fields
     }
-    
-    console.log(saleDetail);
-    this.clearFields(); // clearing fields
   }
 
   // cash sale
   cashSale() {
     this.saleType = 'cash';
+    this.submitPOS = true;
   }
 
   // credit sale
   creditSale() {
     this.saleType = 'credit';
+    this.submitPOS = true;
   }
 
   clearFields() {
@@ -126,6 +132,7 @@ export class PosComponent {
     this.products = [];
     this.saleType = '';
     this.change = 0;
+    this.submitPOS = false;
   }
 
   logout() {
