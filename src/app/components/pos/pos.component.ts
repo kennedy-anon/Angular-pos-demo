@@ -105,13 +105,19 @@ export class PosComponent {
     if (this.submitPOS) {
       const saleDetail = {
         products: this.products,
-        total: this.getTotal(),
-        saleType: this.saleType,
-        cash_received: this.cash_received,
-        change: this.change
+        sale_type: this.saleType,
+        total_sales: this.getTotal(),
+        cash_received: this.cash_received ? this.cash_received : null,
+        change: this.change ? this.change : null,
+        invoice: {
+            customer_name: "Kennedy",
+            customer_contact_no: "0712345678",
+            invoice_amount: this.getTotal() ? this.getTotal() : null,
+            invoice_paid: 0
+        }
       }
       
-      this.posService.saveSale(saleDetail.products).subscribe({
+      this.posService.saveSale(saleDetail).subscribe({
         next: (res => {
           res.status == 201 ? this._snackBar.showSuccessMessage((res.body as any)?.detail): undefined;
           this.clearFields();
@@ -120,6 +126,7 @@ export class PosComponent {
           if (err.status == 403) {
             this._snackBar.showErrorMessage("Session expired. Kindly login again.");
           }
+          console.log(err);
         })
       });
 
