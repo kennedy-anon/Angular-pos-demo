@@ -34,6 +34,11 @@ export class PosComponent {
   change : number = 0;
   saleType !: string;
   submitPOS : boolean = false;
+  invoice : any = {
+    customer_name: '',
+    customer_contact_no: '',
+    invoice_paid: ''
+  };
 
   currentProduct : any = {
     product_name: '',
@@ -111,10 +116,10 @@ export class PosComponent {
         cash_received: this.cash_received ? this.cash_received : null,
         change: this.change ? this.change : null,
         invoice: {
-            customer_name: "Chrisitne Muthoni",
-            customer_contact_no: "0712345678",
+            customer_name: this.invoice.customer_name ? this.invoice.customer_name : '',
+            customer_contact_no: this.invoice.customer_contact_no ? this.invoice.customer_contact_no : '',
             invoice_amount: this.getTotal() ? this.getTotal() : null,
-            invoice_paid: 0
+            invoice_paid: this.invoice.invoice_paid ? this.invoice.invoice_paid : null
         }
       }
       
@@ -144,17 +149,23 @@ export class PosComponent {
   creditSale() {
     this.saleType = 'credit';
     this.submitPOS = true;
+    this.onSaleSubmit();
   }
 
+  // collect credit sale details
   openCreditSale(): void {
-    const dialogRef = this.dialog.open(CreditSaleComponent, {
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result != undefined ){
-        // credit sale
-      }
-    });
+    if (this.form.valid && (this.products.length != 0)) {
+      const dialogRef = this.dialog.open(CreditSaleComponent, {
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result != undefined ){
+          this.invoice = result;
+          this.creditSale();
+        }
+      });
+    }
+    
   }
 
   clearFields() {

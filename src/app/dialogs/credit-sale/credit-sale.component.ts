@@ -8,7 +8,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class CreditSaleComponent {
 
-  invoice : any;
+  invoice : any = {
+    customer_name: '',
+    customer_contact_no: '',
+    invoice_paid: ''
+  };
 
   constructor(public dialogRef: MatDialogRef<CreditSaleComponent>) {}
 
@@ -17,7 +21,7 @@ export class CreditSaleComponent {
   }
 
   saveCreditSale() {
-    
+    this.dialogRef.close(this.invoice);
   }
 
 }
