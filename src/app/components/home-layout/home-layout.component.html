@@ -52,10 +52,23 @@
         </a>
       </div>
   
-      <a href="" class="p-2 d-block my-1">
+      <a class="p-2 d-block my-1" (click)="showSalesList()">
         <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">bar_chart</mat-icon>
         <span class="">Sales</span>
       </a>
+
+      <!-- sales sub list -->
+      <div class="productList" *ngIf="expandSales">
+        <a class="p-2 d-block my-1">
+          <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">fact_check</mat-icon>
+          <span class="">All Sales</span>
+        </a>
+
+        <a [routerLink]="['sales/credit-sales']" routerLinkActive="active-link" class="p-2 d-block my-1">
+          <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">view_list</mat-icon>
+          <span class="">List Credit Sales</span>
+        </a>
+      </div>
   
       <a href="" class="p-2 d-block my-1">
         <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">request_quote</mat-icon>

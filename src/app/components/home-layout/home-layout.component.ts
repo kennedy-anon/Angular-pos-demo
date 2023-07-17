@@ -12,6 +12,7 @@ export class HomeLayoutComponent {
   currentYear = new Date().getFullYear();
   showList: boolean = false;
   expandPurchase: boolean = false;
+  expandSales: boolean = false;
   userDetail : any;
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -24,6 +25,11 @@ export class HomeLayoutComponent {
   // expand purchases navBar
   showPurchaseList() {
     this.expandPurchase = !this.expandPurchase;
+  }
+
+  // expand sale navBar
+  showSalesList() {
+    this.expandSales = !this.expandSales;
   }
 
   // log out
