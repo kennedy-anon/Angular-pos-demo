@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import algoliasearch from 'algoliasearch/lite';
 import { ConfirmClearComponent } from 'src/app/dialogs/confirm-clear/confirm-clear.component';
+import { CreditSaleComponent } from 'src/app/dialogs/credit-sale/credit-sale.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { PosService } from 'src/app/services/pos.service';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
@@ -110,7 +111,7 @@ export class PosComponent {
         cash_received: this.cash_received ? this.cash_received : null,
         change: this.change ? this.change : null,
         invoice: {
-            customer_name: "Kennedy",
+            customer_name: "Chrisitne Muthoni",
             customer_contact_no: "0712345678",
             invoice_amount: this.getTotal() ? this.getTotal() : null,
             invoice_paid: 0
@@ -143,6 +144,17 @@ export class PosComponent {
   creditSale() {
     this.saleType = 'credit';
     this.submitPOS = true;
+  }
+
+  openCreditSale(): void {
+    const dialogRef = this.dialog.open(CreditSaleComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined ){
+        // credit sale
+      }
+    });
   }
 
   clearFields() {
