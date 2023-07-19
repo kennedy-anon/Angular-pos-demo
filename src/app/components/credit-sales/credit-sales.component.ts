@@ -32,7 +32,7 @@ export class CreditSalesComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined ){
-        console.log(result);
+        this.fetchCreditSales();
       }
     });
   }
@@ -83,8 +83,7 @@ export class CreditSalesComponent {
     return this.dataSource.filteredData.reduce((total: number, sale: any) => total + sale.invoice_balance, 0);
   }
 
-  ngOnInit(): void {
-    this.defaultFilterPredicate = this.dataSource.filterPredicate;
+  fetchCreditSales() {
     this.salesService.getCreditSales().subscribe({
       next: (res => {
         this.credit_sales = res;
@@ -96,7 +95,11 @@ export class CreditSalesComponent {
         }
       })
     });
-    
+  }
+
+  ngOnInit(): void {
+    this.defaultFilterPredicate = this.dataSource.filterPredicate;
+    this.fetchCreditSales();
   }
 
   ngAfterViewInit(): void {
