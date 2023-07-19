@@ -3,6 +3,7 @@ import { SalesService } from 'src/app/services/sales.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-credit-sales',
@@ -17,6 +18,7 @@ export class CreditSalesComponent {
   credit_sales : any = [];
   dataSource = new MatTableDataSource(this.credit_sales);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private salesService: SalesService) {}
 
@@ -50,12 +52,12 @@ export class CreditSalesComponent {
 
   // get total amount
   getTotalAmount() {
-    return this.credit_sales.reduce((total: number, sale: any) => total + parseFloat(sale.invoice_amount), 0);
+    return this.dataSource.filteredData.reduce((total: number, sale: any) => total + parseFloat(sale.invoice_amount), 0);
   }
 
   //get total amount paid
   getTotalPaid(){
-    return this.credit_sales.reduce((total: number, sale: any) => {
+    return this.dataSource.filteredData.reduce((total: number, sale: any) => {
       const paid = sale.invoice_paid !== null ? parseFloat(sale.invoice_paid) : 0;
       return total + paid;
     }, 0);
@@ -63,7 +65,7 @@ export class CreditSalesComponent {
 
   // get total balance
   getTotalBalance() {
-    return this.credit_sales.reduce((total: number, sale: any) => total + sale.invoice_balance, 0);
+    return this.dataSource.filteredData.reduce((total: number, sale: any) => total + sale.invoice_balance, 0);
   }
 
   ngOnInit(): void {
@@ -82,5 +84,6 @@ export class CreditSalesComponent {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }
