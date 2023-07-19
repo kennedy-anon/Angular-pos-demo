@@ -10,6 +10,9 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
   styleUrls: ['./credit-sales.component.css']
 })
 export class CreditSalesComponent {
+  defaultFilterPredicate !: (data: any, filter: string) => boolean;
+  selectedDate !: string;
+  customer_name_filter !: string;
   displayedColumns = ['no', 'created_at', 'customer_name', 'invoice_amount', 'invoice_paid', 'invoice_balance', 'customer_contact_no', 'actions'];
   credit_sales : any = [];
   dataSource = new MatTableDataSource(this.credit_sales);
@@ -38,6 +41,13 @@ export class CreditSalesComponent {
     this.dataSource.filter = date.toString();
   }
 
+  clearFilters(){
+    this.dataSource.filterPredicate = this.defaultFilterPredicate;
+    this.dataSource.filter = '';
+    this.customer_name_filter = '';
+    this.selectedDate = '';
+  }
+
   // get total amount
   getTotalAmount() {
     return this.credit_sales.reduce((total: number, sale: any) => total + parseFloat(sale.invoice_amount), 0);
@@ -57,6 +67,7 @@ export class CreditSalesComponent {
   }
 
   ngOnInit(): void {
+    this.defaultFilterPredicate = this.dataSource.filterPredicate;
     this.salesService.getCreditSales().subscribe({
       next: (res => {
         this.credit_sales = res;

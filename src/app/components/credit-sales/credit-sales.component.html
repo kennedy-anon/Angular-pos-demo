@@ -4,17 +4,19 @@
 
 <div class="container mt-2">
   <mat-form-field appearance="outline">
-    <mat-label>Search by customer name</mat-label>
-    <input matInput (keyup)="applyFilter($event)" #input>
+    <mat-label>Filter by Customer Name</mat-label>
+    <input matInput (keyup)="applyFilter($event)" #input [(ngModel)]="customer_name_filter">
   </mat-form-field>
 
   <mat-form-field class="mx-2"  appearance="outline">
-    <mat-label>Date</mat-label>
-    <input matInput (dateChange)="filterByDate($event)" [matDatepicker]="picker">
+    <mat-label>Filter by Date</mat-label>
+    <input matInput [(ngModel)]="selectedDate" (dateChange)="filterByDate($event)" [matDatepicker]="picker">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+
+  <button mat-stroked-button (click)="clearFilters()">Clear Filters</button>
 </div>
 
 <div class="container my-3 overflow-auto">
