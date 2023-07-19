@@ -9,7 +9,8 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class CreditSalePaymentComponent {
   credit_payment : any = {
-    amount : ''
+    amount : '',
+    invoice_no: ''
   }
   dataSource = new MatTableDataSource<any>([]);
   displayedColumns = ['created_at', 'customer_name', 'invoice_amount', 'invoice_paid', 'invoice_balance', 'customer_contact_no'];
@@ -21,7 +22,8 @@ export class CreditSalePaymentComponent {
   }
 
   savePayment() {
-
+    this.credit_payment.invoice_no = this.dataSource.data[0].invoice_no;
+    console.log(this.credit_payment);
   }
 
   ngOnInit(): void {
