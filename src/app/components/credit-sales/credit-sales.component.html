@@ -2,13 +2,13 @@
     Credit Sales
 </mat-toolbar>
 
-<div class="container mt-2">
-  <mat-form-field appearance="outline">
+<div class="container mt-2 row">
+  <mat-form-field appearance="outline" class="col-sm-3">
     <mat-label>Filter by Customer Name</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input [(ngModel)]="customer_name_filter">
   </mat-form-field>
 
-  <mat-form-field class="mx-2"  appearance="outline">
+  <mat-form-field appearance="outline" class="col-sm-3">
     <mat-label>Filter by Date</mat-label>
     <input matInput [(ngModel)]="selectedDate" (dateChange)="filterByDate($event)" [matDatepicker]="picker">
     <mat-hint>MM/DD/YYYY</mat-hint>
@@ -16,7 +16,10 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <button mat-stroked-button (click)="clearFilters()">Clear Filters</button>
+  <div class="col-sm-3 py-2">
+    <button mat-stroked-button (click)="clearFilters()" color="accent">Clear Filters</button>
+  </div>
+
 </div>
 
 <div class="container my-3 overflow-auto">
