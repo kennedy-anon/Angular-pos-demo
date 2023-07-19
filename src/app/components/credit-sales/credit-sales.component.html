@@ -2,10 +2,18 @@
     Credit Sales
 </mat-toolbar>
 
-<div class="container mt-1">
+<div class="container mt-2">
   <mat-form-field appearance="outline">
-    <mat-label>Search by Customer Name</mat-label>
+    <mat-label>Search by customer name</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input>
+  </mat-form-field>
+
+  <mat-form-field class="mx-2"  appearance="outline">
+    <mat-label>Date</mat-label>
+    <input matInput (dateChange)="filterByDate($event)" [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 </div>
 

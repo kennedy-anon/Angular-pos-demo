@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { SalesService } from 'src/app/services/sales.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-credit-sales',
@@ -20,6 +21,21 @@ export class CreditSalesComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  // filtering by date
+  filterByDate(event: MatDatepickerInputEvent<Date>) {
+    if (event.value) {
+      this.setDateFilter(event.value);
+    }
+  }
+
+  setDateFilter(date: Date) {
+    this.dataSource.filterPredicate = (data: any) => {
+      const rowData = new Date(data.created_at);
+      return rowData >= date && rowData <= new Date(date.getTime() + 86400000);
+    }
+    this.dataSource.filter = date.toString();
   }
 
   // get total amount
