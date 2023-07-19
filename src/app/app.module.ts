@@ -28,6 +28,9 @@ import { PosComponent } from './components/pos/pos.component';
 import { ConfirmClearComponent } from './dialogs/confirm-clear/confirm-clear.component';
 import { CreditSaleComponent } from './dialogs/credit-sale/credit-sale.component';
 import { CreditSalesComponent } from './components/credit-sales/credit-sales.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -61,6 +64,9 @@ import { CreditSalesComponent } from './components/credit-sales/credit-sales.com
     MatTooltipModule,
     HttpClientModule,
     MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

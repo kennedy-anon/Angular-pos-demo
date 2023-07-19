@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SalesService } from 'src/app/services/sales.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-credit-sales',
@@ -9,8 +11,16 @@ import { SalesService } from 'src/app/services/sales.service';
 export class CreditSalesComponent {
   displayedColumns = ['no', 'created_at', 'customer_name', 'invoice_amount', 'invoice_paid', 'invoice_balance', 'customer_contact_no', 'actions'];
   credit_sales : any = [];
+  dataSource = new MatTableDataSource(this.credit_sales);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private salesService: SalesService) {}
+
+  // filtering by customer name
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   // get total amount
   getTotalAmount() {
@@ -34,11 +44,16 @@ export class CreditSalesComponent {
     this.salesService.getCreditSales().subscribe({
       next: (res => {
         this.credit_sales = res;
+        this.dataSource.data = this.credit_sales;
       }),
       error: (err => {
         console.log(err);
       })
     });
     
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 }

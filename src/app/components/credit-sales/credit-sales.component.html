@@ -2,8 +2,15 @@
     Credit Sales
 </mat-toolbar>
 
+<div class="container mt-1">
+  <mat-form-field appearance="outline">
+    <mat-label>Search by Customer Name</mat-label>
+    <input matInput (keyup)="applyFilter($event)" #input>
+  </mat-form-field>
+</div>
+
 <div class="container my-3 overflow-auto">
-    <table mat-table [dataSource]="credit_sales" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <!-- No. Column -->
         <ng-container matColumnDef="no">
@@ -65,4 +72,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-row"></tr>
         <tr mat-footer-row *matFooterRowDef="['no', 'invoice_amount', 'invoice_paid', 'invoice_balance']" class="totals"></tr>
       </table>
+
+      <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons aria-label="Select page of credit sales"></mat-paginator>
 </div>
