@@ -4,6 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatSort} from '@angular/material/sort';
+import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CreditSalePaymentComponent } from 'src/app/dialogs/credit-sale-payment/credit-sale-payment.component';
 
 @Component({
   selector: 'app-credit-sales',
@@ -20,7 +23,19 @@ export class CreditSalesComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private salesService: SalesService) {}
+  constructor(public dialog: MatDialog, private salesService: SalesService, private _snackBar: SnackBarCustomService) {}
+
+  openCreditSalePayment(invoiceData: any) {
+    const dialogRef = this.dialog.open(CreditSalePaymentComponent, {
+      data: {invoiceData: invoiceData},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined ){
+        console.log(result);
+      }
+    });
+  }
 
   // filtering by customer name
   applyFilter(event: Event) {
@@ -76,7 +91,9 @@ export class CreditSalesComponent {
         this.dataSource.data = this.credit_sales;
       }),
       error: (err => {
-        console.log(err);
+        if (err.status == 403) {
+          this._snackBar.showErrorMessage("Session expired. Kindly login again.");
+        }
       })
     });
     

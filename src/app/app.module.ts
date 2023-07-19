@@ -34,6 +34,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSortModule } from '@angular/material/sort';
+import { CreditSalePaymentComponent } from './dialogs/credit-sale-payment/credit-sale-payment.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatSortModule } from '@angular/material/sort';
     ConfirmClearComponent,
     CreditSaleComponent,
     CreditSalesComponent,
+    CreditSalePaymentComponent,
   ],
   imports: [
     NgAisModule.forRoot(),
