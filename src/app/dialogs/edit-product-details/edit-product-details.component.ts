@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-product-details',
@@ -7,4 +8,21 @@ import { Component } from '@angular/core';
 })
 export class EditProductDetailsComponent {
 
+  product : any = {
+
+  }
+
+  constructor(public dialogRef: MatDialogRef<EditProductDetailsComponent>, @Inject(MAT_DIALOG_DATA) public data: {product: any}) {}
+
+  onCancelClick(): void {
+    this.dialogRef.close();
+  }
+
+  updateProductDetail() {
+    
+  }
+
+  ngOnInit(): void {
+    this.product = this.data.product;
+  }
 }

@@ -59,7 +59,7 @@
 
             <mat-menu #actionMenu="matMenu" class="account-menu">
               <ng-template matMenuContent>
-                <button mat-menu-item>
+                <button (click)="openEditProduct(element)" mat-menu-item>
                   <mat-icon>edit</mat-icon>
                   <span>Edit</span>
                 </button>

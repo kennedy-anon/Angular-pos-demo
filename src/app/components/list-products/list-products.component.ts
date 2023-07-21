@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { EditProductDetailsComponent } from 'src/app/dialogs/edit-product-details/edit-product-details.component';
 import { ProductsService } from 'src/app/services/products.service';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 
@@ -19,8 +21,21 @@ export class ListProductsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private productsService: ProductsService, private _snackBar: SnackBarCustomService) {}
+  constructor(public dialog: MatDialog, private productsService: ProductsService, private _snackBar: SnackBarCustomService) {}
   
+  // open edit product detail
+  openEditProduct(product: any) {
+    const dialogRef = this.dialog.open(EditProductDetailsComponent, {
+      data: {product: product},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined ){
+        // do nothing
+      }
+    });
+  }
+
   // filter by product name
   filterByName(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
