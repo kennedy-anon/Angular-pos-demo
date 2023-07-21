@@ -7,6 +7,7 @@ import { MatSort} from '@angular/material/sort';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreditSalePaymentComponent } from 'src/app/dialogs/credit-sale-payment/credit-sale-payment.component';
+import { CreditSaleDetailComponent } from 'src/app/dialogs/credit-sale-detail/credit-sale-detail.component';
 
 @Component({
   selector: 'app-credit-sales',
@@ -25,6 +26,7 @@ export class CreditSalesComponent {
 
   constructor(public dialog: MatDialog, private salesService: SalesService, private _snackBar: SnackBarCustomService) {}
 
+  // opens dialog for paying
   openCreditSalePayment(invoiceData: any) {
     const dialogRef = this.dialog.open(CreditSalePaymentComponent, {
       data: {invoiceData: invoiceData},
@@ -33,6 +35,19 @@ export class CreditSalesComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined ){
         this.fetchCreditSales();
+      }
+    });
+  }
+
+  // opens dialog for viewing more sale detail
+  openCreditSaleDetail(invoiceData: any) {
+    const dialogRef = this.dialog.open(CreditSaleDetailComponent, {
+      data: {invoiceData: invoiceData},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined ){
+        // do nothing
       }
     });
   }
