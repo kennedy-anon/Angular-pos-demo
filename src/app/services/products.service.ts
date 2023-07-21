@@ -26,4 +26,11 @@ export class ProductsService {
     return this.http.post(`${this.apiUrl}products/`, product, {headers: headers, observe: 'response'})
     .pipe(map(res => res));
   }
+
+  // list products
+  listProducts() {
+    var headers = this.setHttpHeaders();
+    return this.http.get(`${this.apiUrl}products/list/`, { headers })
+      .pipe(map(res => res));
+  }
 }
