@@ -37,6 +37,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { CreditSalePaymentComponent } from './dialogs/credit-sale-payment/credit-sale-payment.component';
 import { CreditSaleDetailComponent } from './dialogs/credit-sale-detail/credit-sale-detail.component';
 import { ListProductsComponent } from './components/list-products/list-products.component';
+import { EditProductDetailsComponent } from './dialogs/edit-product-details/edit-product-details.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ListProductsComponent } from './components/list-products/list-products.
     CreditSalePaymentComponent,
     CreditSaleDetailComponent,
     ListProductsComponent,
+    EditProductDetailsComponent,
   ],
   imports: [
     NgAisModule.forRoot(),
