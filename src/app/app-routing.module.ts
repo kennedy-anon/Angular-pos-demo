@@ -9,6 +9,7 @@ import { adminGuard, cashierGuard } from './guards/access-level.guard';
 import { AddPurchasesComponent } from './components/add-purchases/add-purchases.component';
 import { PosComponent } from './components/pos/pos.component';
 import { CreditSalesComponent } from './components/credit-sales/credit-sales.component';
+import { ListProductsComponent } from './components/list-products/list-products.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: '', component: HomeLayoutComponent, canActivate:[authGuard, adminGuard], children: [
     {path: 'products/add', component: AddProductsComponent, canActivate:[authGuard, adminGuard]},
     {path: 'products/add-multiple', component: AddMultipleProductsComponent, canActivate:[authGuard, adminGuard]},
+    {path: 'products/list', component: ListProductsComponent, canActivate:[authGuard, adminGuard]},
     {path: 'purchases/add', component: AddPurchasesComponent, canActivate:[authGuard, adminGuard]},
     {path: 'sales/credit-sales', component: CreditSalesComponent, canActivate:[authGuard, adminGuard]},
   ]},

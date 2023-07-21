@@ -36,6 +36,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSortModule } from '@angular/material/sort';
 import { CreditSalePaymentComponent } from './dialogs/credit-sale-payment/credit-sale-payment.component';
 import { CreditSaleDetailComponent } from './dialogs/credit-sale-detail/credit-sale-detail.component';
+import { ListProductsComponent } from './components/list-products/list-products.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { CreditSaleDetailComponent } from './dialogs/credit-sale-detail/credit-s
     CreditSalesComponent,
     CreditSalePaymentComponent,
     CreditSaleDetailComponent,
+    ListProductsComponent,
   ],
   imports: [
     NgAisModule.forRoot(),

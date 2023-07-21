@@ -18,7 +18,7 @@
   
       <!-- products sub list -->
       <div class="productList" *ngIf="showList">
-        <a href="" class="p-2 d-block my-1">
+        <a [routerLink]="['products/list']" routerLinkActive="active-link" class="p-2 d-block my-1">
           <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">view_list</mat-icon>
           <span class="">List Products</span>
         </a>
