@@ -13,7 +13,11 @@ export class CreditSaleDetailComponent {
   creditSaleDataSource = new MatTableDataSource<any>([]);
   productsDataSource = new MatTableDataSource<any>([]);
   paymentsDataSource = new MatTableDataSource<any>([]);
+
   creditSaleDisplayedColumns = ['created_at', 'customer_name', 'invoice_amount', 'invoice_paid', 'invoice_balance', 'customer_contact_no'];
+  productsDisplayedColumns = ['no', 'product_name', 'units', 'unit_price', 'amount'];
+  paymentsDisplayedColumns = ['no', 'amount', 'created_at'];
+
 
   constructor(public dialogRef: MatDialogRef<CreditSaleDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: {invoiceData: any},
   private salesService: SalesService, private _snackBar: SnackBarCustomService) {}
@@ -26,8 +30,8 @@ export class CreditSaleDetailComponent {
     this.creditSaleDataSource.data.push(this.data.invoiceData);
     this.salesService.getCreditSaleDetail(this.data.invoiceData.invoice_no).subscribe({
       next: ((res: any) => {
-        this.productsDataSource.data.push(res.products);
-        this.paymentsDataSource.data.push(res.payments);
+        this.productsDataSource.data = res.products;
+        this.paymentsDataSource.data = res.payments;
       }),
       error: (err => {
         if (err.status == 403) {
