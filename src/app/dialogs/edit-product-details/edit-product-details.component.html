@@ -8,22 +8,29 @@
     </span></mat-icon></button>
 </div>
 
-<div class="container px-4 mb-2">
+<mat-dialog-content class="container px-4 mb-2">
     <form ngNativeValidate (submit)="updateProductDetail()">
         <div class="row">
           <div class="form-group col-sm-6 sm-margin">
             <label for="product_name">Product Name</label>
-            <input type="text" class="form-control" [(ngModel)]="product.product_name" name="product_name" id="product_name" placeholder="" disabled="true" required>
+            <input type="text" class="form-control" [(ngModel)]="product.product_name" name="product_name" id="product_name" placeholder="" required>
           </div>
     
           <div class="form-group col-sm-3 sm-margin">
-            <label for="quantity">Purchase Quantity</label>
-            <input type="number" class="form-control" [(ngModel)]="product.units" name="quantity" id="quantity" placeholder="" required>
+            <label for="available_units">Available Units</label>
+            <input type="number" class="form-control" [(ngModel)]="product.available_units" name="available_units" id="available_units" disabled="true" placeholder="" required>
           </div>
       
           <div class="form-group col-sm-3 sm-margin">
-            <label for="purchase_costs">Total Purchase Costs</label>
-            <input type="number" class="form-control" [(ngModel)]="product.buying_price" name="purchase_costs" id="purchase_costs" placeholder="" required>
+            <label for="min_selling_price">Min Selling Price</label>
+            <input type="number" class="form-control" [(ngModel)]="product.min_selling_price" name="min_selling_price" id="min_selling_price" placeholder="">
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="form-group col-sm-3">
+            <label for="min_units_alert">Min Units Alert</label>
+            <input type="number" class="form-control" [(ngModel)]="product.min_units_alert" name="min_units_alert" id="min_units_alert" placeholder="" required>
           </div>
         </div>
     
@@ -32,4 +39,4 @@
         </div>
     
       </form>
-</div>
+</mat-dialog-content>

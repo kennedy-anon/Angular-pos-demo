@@ -19,7 +19,7 @@ export class EditProductDetailsComponent {
   }
 
   updateProductDetail() {
-    
+    console.log(this.product);
   }
 
   ngOnInit(): void {
