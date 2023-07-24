@@ -33,4 +33,11 @@ export class PurchasesService {
     return this.http.get(`${this.apiUrl}purchases/${product_id}/`, { headers })
       .pipe(map(res => res));
   }
+
+  // get all purchases
+  getAllPurchases() {
+    var headers = this.setHttpHeaders();
+    return this.http.get(`${this.apiUrl}purchases/all/`, { headers })
+      .pipe(map(res => res));
+  }
 }
