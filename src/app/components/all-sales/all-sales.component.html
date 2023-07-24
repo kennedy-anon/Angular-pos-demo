@@ -1,1 +1,72 @@
-<p>all-sales works!</p>
+<mat-toolbar>
+    All Sales
+</mat-toolbar>
+
+<div class="container mt-2 row">
+  <mat-form-field appearance="outline" class="col-sm-3">
+    <mat-label>Filter by Product Name</mat-label>
+    <input matInput (keyup)="applyFilter($event)" #input [(ngModel)]="product_name_filter">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="col-sm-3">
+    <mat-label>Filter by Date</mat-label>
+    <input matInput [(ngModel)]="selectedDate" (dateChange)="filterByDate($event)" [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div class="col-sm-3 py-2">
+    <button mat-stroked-button (click)="clearFilters()" color="accent">Clear Filters</button>
+  </div>
+
+</div>
+
+<div class="container my-3 overflow-auto">
+    <table mat-table [dataSource]="salesDataSource" class="mat-elevation-z8" matSort>
+
+        <!-- No. Column -->
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+          <td colspan="4" mat-footer-cell *matFooterCellDef style="text-align: right;"> Total </td>
+        </ng-container>
+
+        <!--Date Column -->
+        <ng-container matColumnDef="created_at">
+            <th mat-header-cell *matHeaderCellDef>Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.created_at | date: 'medium'}} </td>
+          </ng-container>
+    
+        <!--Product Name Column -->
+        <ng-container matColumnDef="product_name">
+          <th mat-header-cell *matHeaderCellDef>Product Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.product_name}} </td>
+        </ng-container>
+    
+        <!--Units Column -->
+        <ng-container matColumnDef="units">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Units </th>
+          <td mat-cell *matCellDef="let element"> {{element.units}} </td>
+        </ng-container>
+    
+        <!--Amount Column -->
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Sub Total </th>
+          <td mat-cell *matCellDef="let element"> {{element.amount | currency:' ':'code'}} </td>
+          <td mat-footer-cell *matFooterCellDef> {{ getTotalAmount() | currency:' ':'code' }} </td>
+        </ng-container>
+
+        <!--Sale type -->
+        <ng-container matColumnDef="sale_type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Sale Type</th>
+            <td mat-cell *matCellDef="let element"> {{element.sale_type}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-row"></tr>
+        <tr mat-footer-row *matFooterRowDef="['no', 'amount']" class="totals"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons aria-label="Select page of sales"></mat-paginator>
+</div>

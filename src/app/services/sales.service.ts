@@ -33,4 +33,11 @@ export class SalesService {
     return this.http.get(`${this.apiUrl}sales/credit-sales/detail/?invoice_no=${invoice_no}`, { headers })
       .pipe(map(res => res));
   }
+
+  // retrieving all sales
+  getAllSales() {
+    var headers = this.setHttpHeaders();
+    return this.http.get(`${this.apiUrl}sales/all/`, { headers })
+      .pipe(map(res => res));
+  }
 }
