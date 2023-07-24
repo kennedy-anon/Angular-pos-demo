@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { PurchasesService } from 'src/app/services/purchases.service';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
@@ -11,6 +12,9 @@ import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service
 })
 export class ProductPurchaseHistoryComponent {
   purchasesDataSource = new MatTableDataSource<any>([]);
+  purchasesDisplayedColumns = ['no', 'created_at', 'units', 'buying_price'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(public dialogRef: MatDialogRef<ProductPurchaseHistoryComponent>, private purchasesService: PurchasesService, 
     @Inject(MAT_DIALOG_DATA) public data: {product: any}, private _snackBar: SnackBarCustomService) {}
@@ -31,5 +35,9 @@ export class ProductPurchaseHistoryComponent {
       })
     });
     
+  }
+
+  ngAfterViewInit(): void {
+    this.purchasesDataSource.paginator = this.paginator;
   }
 }

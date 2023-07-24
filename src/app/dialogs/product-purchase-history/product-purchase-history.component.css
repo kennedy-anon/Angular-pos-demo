@@ -1,0 +1,11 @@
+.width-spacer {
+    flex: 1 1 auto;
+}
+
+.mat-row:nth-child(even){
+    background-color: #ffffff;
+}
+        
+.mat-row:nth-child(odd){
+    background-color: #f5f5f5;
+}

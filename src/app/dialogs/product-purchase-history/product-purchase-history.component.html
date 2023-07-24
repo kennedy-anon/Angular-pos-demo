@@ -1,1 +1,49 @@
-<p>product-purchase-history works!</p>
+<div class="d-flex mb-0">
+    <h5 mat-dialog-title>Product purchase history </h5>
+  
+    <span class="width-spacer"></span>
+    
+    <button mat-icon-button (click)="onCancelClick()" color="accent" class="mt-2 mx-3"><mat-icon><span class="material-icons-outlined">
+        close
+    </span></mat-icon></button>
+  </div>
+  
+  <mat-dialog-content>
+    <h5 mat-dialog-title>{{ this.data.product.product_name }}</h5>
+    
+    <div class="container overflow-auto">
+        <table mat-table [dataSource]="purchasesDataSource" class="mat-elevation-z8">
+
+          <!-- No. Column -->
+          <ng-container matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+          </ng-container>
+  
+          <!--Date Column -->
+          <ng-container matColumnDef="created_at">
+              <th mat-header-cell *matHeaderCellDef>Purchase Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.created_at | date: 'medium'}} </td>
+            </ng-container>
+      
+          <!--UnitsCustomer Name Column -->
+          <ng-container matColumnDef="units">
+            <th mat-header-cell *matHeaderCellDef>Units </th>
+            <td mat-cell *matCellDef="let element"> {{element.units}} </td>
+          </ng-container>
+      
+          <!--Total Purchase Costs Column -->
+          <ng-container matColumnDef="buying_price">
+            <th mat-header-cell *matHeaderCellDef> Total Purchase Costs </th>
+            <td mat-cell *matCellDef="let element"> {{element.buying_price | currency:' ':'code'}} </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="purchasesDisplayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: purchasesDisplayedColumns;" class="mat-row"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons aria-label="Select page of purchases"></mat-paginator>
+    </div>
+  
+  </mat-dialog-content>
+  
