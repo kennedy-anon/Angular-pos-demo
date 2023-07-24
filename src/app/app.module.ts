@@ -38,6 +38,7 @@ import { CreditSalePaymentComponent } from './dialogs/credit-sale-payment/credit
 import { CreditSaleDetailComponent } from './dialogs/credit-sale-detail/credit-sale-detail.component';
 import { ListProductsComponent } from './components/list-products/list-products.component';
 import { EditProductDetailsComponent } from './dialogs/edit-product-details/edit-product-details.component';
+import { ProductPurchaseHistoryComponent } from './dialogs/product-purchase-history/product-purchase-history.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { EditProductDetailsComponent } from './dialogs/edit-product-details/edit
     CreditSaleDetailComponent,
     ListProductsComponent,
     EditProductDetailsComponent,
+    ProductPurchaseHistoryComponent,
   ],
   imports: [
     NgAisModule.forRoot(),

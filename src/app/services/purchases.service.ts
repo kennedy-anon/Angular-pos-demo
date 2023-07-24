@@ -26,4 +26,11 @@ export class PurchasesService {
     return this.http.post(`${this.apiUrl}products/new-stock/`, purchases, {headers: headers, observe: 'response'})
     .pipe(map(res => res));
   }
+
+  // purchases for a certain product
+  getProductPurchases(product_id: number) {
+    var headers = this.setHttpHeaders();
+    return this.http.get(`${this.apiUrl}purchases/${product_id}/`, { headers })
+      .pipe(map(res => res));
+  }
 }

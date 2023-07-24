@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { EditProductDetailsComponent } from 'src/app/dialogs/edit-product-details/edit-product-details.component';
+import { ProductPurchaseHistoryComponent } from 'src/app/dialogs/product-purchase-history/product-purchase-history.component';
 import { ProductsService } from 'src/app/services/products.service';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 
@@ -31,6 +32,19 @@ export class ListProductsComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       this.fetchProducts();
+      if (result != undefined ){
+        // do nothing
+      }
+    });
+  }
+
+  // view purchase history for the product
+  openPurchaseHistory(product: any) {
+    const dialogRef = this.dialog.open(ProductPurchaseHistoryComponent, {
+      data: {product: product},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
       if (result != undefined ){
         // do nothing
       }
