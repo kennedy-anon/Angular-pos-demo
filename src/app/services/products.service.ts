@@ -33,4 +33,11 @@ export class ProductsService {
     return this.http.get(`${this.apiUrl}products/list/`, { headers })
       .pipe(map(res => res));
   }
+
+  // update product detail and min units alert
+  updateProduct(product: any, product_id: number) {
+    var headers = this.setHttpHeaders();
+    return this.http.put(`${this.apiUrl}products/${product_id}/`, product, {headers: headers, observe: 'response'})
+    .pipe(map(res => res));
+  }
 }

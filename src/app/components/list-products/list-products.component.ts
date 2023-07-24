@@ -30,6 +30,7 @@ export class ListProductsComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.fetchProducts();
       if (result != undefined ){
         // do nothing
       }
@@ -48,8 +49,7 @@ export class ListProductsComponent {
     this.product_name_filter = '';
   }
 
-  ngOnInit(): void {
-    this.defaultFilterPredicate = this.productsDataSource.filterPredicate;
+  fetchProducts() {
     this.productsService.listProducts().subscribe({
       next: ((res: any) => {
         this.productsDataSource.data = res;
@@ -59,8 +59,12 @@ export class ListProductsComponent {
           this._snackBar.showErrorMessage("Session expired. Kindly login again.");
         }
       })
-    })
-    
+    });
+  }
+
+  ngOnInit(): void {
+    this.defaultFilterPredicate = this.productsDataSource.filterPredicate;
+    this.fetchProducts();
   }
 
   ngAfterViewInit(): void {
