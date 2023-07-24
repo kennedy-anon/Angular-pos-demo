@@ -47,4 +47,11 @@ export class ProductsService {
     return this.http.delete(`${this.apiUrl}products/${product_id}/delete/`, {headers: headers, observe: 'response'})
     .pipe(map(res => res));
   }
+
+  // fetch stock running low
+  getLowOnStock() {
+    var headers = this.setHttpHeaders();
+    return this.http.get(`${this.apiUrl}products/low-stock/`, { headers })
+      .pipe(map(res => res));
+  }
 }

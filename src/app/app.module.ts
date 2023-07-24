@@ -40,6 +40,7 @@ import { ListProductsComponent } from './components/list-products/list-products.
 import { EditProductDetailsComponent } from './dialogs/edit-product-details/edit-product-details.component';
 import { ProductPurchaseHistoryComponent } from './dialogs/product-purchase-history/product-purchase-history.component';
 import { ConfirmDeleteComponent } from './dialogs/confirm-delete/confirm-delete.component';
+import { StockRunningLowComponent } from './components/stock-running-low/stock-running-low.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ConfirmDeleteComponent } from './dialogs/confirm-delete/confirm-delete.
     EditProductDetailsComponent,
     ProductPurchaseHistoryComponent,
     ConfirmDeleteComponent,
+    StockRunningLowComponent,
   ],
   imports: [
     NgAisModule.forRoot(),

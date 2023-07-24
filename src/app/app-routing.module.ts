@@ -10,6 +10,7 @@ import { AddPurchasesComponent } from './components/add-purchases/add-purchases.
 import { PosComponent } from './components/pos/pos.component';
 import { CreditSalesComponent } from './components/credit-sales/credit-sales.component';
 import { ListProductsComponent } from './components/list-products/list-products.component';
+import { StockRunningLowComponent } from './components/stock-running-low/stock-running-low.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
     {path: 'products/add', component: AddProductsComponent, canActivate:[authGuard, adminGuard]},
     {path: 'products/add-multiple', component: AddMultipleProductsComponent, canActivate:[authGuard, adminGuard]},
     {path: 'products/list', component: ListProductsComponent, canActivate:[authGuard, adminGuard]},
+    {path: 'products/low-stock', component: StockRunningLowComponent, canActivate:[authGuard, adminGuard]},
     {path: 'purchases/add', component: AddPurchasesComponent, canActivate:[authGuard, adminGuard]},
     {path: 'sales/credit-sales', component: CreditSalesComponent, canActivate:[authGuard, adminGuard]},
   ]},
