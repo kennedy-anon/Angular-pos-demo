@@ -64,7 +64,7 @@
 
       <!-- sales sub list -->
       <div class="productList" *ngIf="expandSales">
-        <a class="p-2 d-block my-1">
+        <a [routerLink]="['sales/all']" routerLinkActive="active-link" class="p-2 d-block my-1">
           <mat-icon class="material-icons-outlined align-middle" style="margin-left: 1rem;">fact_check</mat-icon>
           <span class="">All Sales</span>
         </a>
