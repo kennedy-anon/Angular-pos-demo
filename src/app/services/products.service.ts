@@ -40,4 +40,11 @@ export class ProductsService {
     return this.http.put(`${this.apiUrl}products/${product_id}/`, product, {headers: headers, observe: 'response'})
     .pipe(map(res => res));
   }
+
+  // delete product
+  deleteProduct(product_id: number) {
+    var headers = this.setHttpHeaders();
+    return this.http.delete(`${this.apiUrl}products/${product_id}/delete/`, {headers: headers, observe: 'response'})
+    .pipe(map(res => res));
+  }
 }

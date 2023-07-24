@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmDeleteComponent } from 'src/app/dialogs/confirm-delete/confirm-delete.component';
 import { EditProductDetailsComponent } from 'src/app/dialogs/edit-product-details/edit-product-details.component';
 import { ProductPurchaseHistoryComponent } from 'src/app/dialogs/product-purchase-history/product-purchase-history.component';
 import { ProductsService } from 'src/app/services/products.service';
@@ -49,6 +50,32 @@ export class ListProductsComponent {
         // do nothing
       }
     });
+  }
+
+  confirmDeleteProduct(product: any) {
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+      data: {name: product.product_name},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'delete' ){
+        this.deleteProduct(product);
+      }
+    });
+  }
+
+  deleteProduct(product: any) {
+    this.productsService.deleteProduct(product.product_id).subscribe({
+      next: (res => {
+        res.status == 204 ? this._snackBar.showSuccessMessage(`'${product.product_name}' deleted successfully.`) : undefined;
+        this.fetchProducts(); // refreshing
+      }),
+      error: (err => {
+        if (err.status == 403) {
+          this._snackBar.showErrorMessage("Session expired. Kindly login again.");
+        }
+      })
+    })
   }
 
   // filter by product name
