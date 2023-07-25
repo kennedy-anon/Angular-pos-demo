@@ -78,6 +78,8 @@ export class ProductSalesReportComponent {
       error: (err => {
         if (err.status == 403) {
           this._snackBar.showErrorMessage("Session expired. Kindly login again.");
+        } else if (err.status == 400) {
+          this._snackBar.showErrorMessage(err.error.detail);
         }
       })
     });
