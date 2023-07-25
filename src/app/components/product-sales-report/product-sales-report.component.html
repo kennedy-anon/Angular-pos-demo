@@ -6,12 +6,12 @@
   <mat-form-field appearance="outline" class="col-sm-3">
     <mat-label>Filter by Product Name</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input [(ngModel)]="product_name_filter">
-    <button *ngIf="product_name_filter" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilters()">
+    <button *ngIf="product_name_filter" matSuffix mat-icon-button aria-label="Clear" (click)="resetFilterProductName()">
         <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="col-sm-3">
+  <mat-form-field appearance="outline" class="col-sm-2">
     <mat-label>From Date:</mat-label>
     <input matInput [(ngModel)]="startDate" (dateChange)="setStartDate($event)" [matDatepicker]="startPicker">
     <mat-hint>MM/DD/YYYY</mat-hint>
@@ -19,7 +19,7 @@
     <mat-datepicker #startPicker></mat-datepicker>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="col-sm-3">
+  <mat-form-field appearance="outline" class="col-sm-2">
     <mat-label>To Date:</mat-label>
     <input matInput [(ngModel)]="endDate" (dateChange)="setEndDate($event)" [matDatepicker]="endPicker">
     <mat-hint>MM/DD/YYYY</mat-hint>
@@ -27,7 +27,11 @@
     <mat-datepicker #endPicker></mat-datepicker>
   </mat-form-field>
 
-  <div class="col-sm-3 py-2">
+  <div class="col-sm-2 py-2">
+    <button mat-raised-button (click)="getProductSalesReport()" style="background: #1E1E1E; color: #D9D9D9;">Date Filter</button>
+  </div>
+
+  <div class="col-sm-2 py-2">
     <button mat-stroked-button (click)="clearFilters()" color="accent">Clear Filters</button>
   </div>
 

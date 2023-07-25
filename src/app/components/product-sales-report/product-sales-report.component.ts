@@ -13,8 +13,8 @@ import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service
 })
 export class ProductSalesReportComponent {
 
-  startDate !: string;
-  endDate !: string;
+  startDate : Date = new Date();
+  endDate : Date = new Date();
   product_name_filter !: string;
   defaultFilterPredicate !: (data: any, filter: string) => boolean;
   productsDataSource = new MatTableDataSource<any>([]);
@@ -35,18 +35,26 @@ export class ProductSalesReportComponent {
   // start date for filtering sales
   setStartDate(event: MatDatepickerInputEvent<Date>) {
     if (event.value) {
-      this.startDate = (new Date(event.value)).toISOString();
+      this.startDate = new Date(event.value);
     }
   }
 
   // end date for filtering sales
   setEndDate(event: MatDatepickerInputEvent<Date>) {
     if (event.value) {
-      this.endDate = (new Date(event.value)).toISOString();
+      this.endDate = new Date(event.value);
     }
   }
 
-  clearFilters(){
+  clearFilters() {
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.configureInitialDates();
+    this.resetFilterProductName();
+    this.getProductSalesReport();
+  }
+
+  resetFilterProductName() {
     this.productsDataSource.filterPredicate = this.defaultFilterPredicate;
     this.productsDataSource.filter = '';
     this.product_name_filter = '';
@@ -62,9 +70,8 @@ export class ProductSalesReportComponent {
     return this.productsDataSource.filteredData.reduce((total: number, product: any) => total + parseFloat(product.total_units), 0);
   }
 
-  ngOnInit(): void {
-    this.defaultFilterPredicate = this.productsDataSource.filterPredicate;
-    this.salesService.productSalesReport('2022-12-31T21:00:00.000Z', '2023-11-30T21:00:00.000Z').subscribe({
+  getProductSalesReport() {
+    this.salesService.productSalesReport(this.startDate.toISOString(), this.endDate.toISOString()).subscribe({
       next: ((res: any) => {
         this.productsDataSource.data = res.sums.product_sales_sums;
       }),
@@ -74,7 +81,20 @@ export class ProductSalesReportComponent {
         }
       })
     });
-    
+  }
+
+  configureInitialDates() {
+    this.startDate.setHours(0, 0, 0, 0);
+    this.endDate.setHours(0, 0, 0, 0);
+    const tomorrow  = new Date(this.endDate);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.endDate = tomorrow;
+  }
+
+  ngOnInit(): void {
+    this.defaultFilterPredicate = this.productsDataSource.filterPredicate;
+    this.configureInitialDates();
+    this.getProductSalesReport();
   }
 
   ngAfterViewInit(): void {
