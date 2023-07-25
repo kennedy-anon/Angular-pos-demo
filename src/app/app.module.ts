@@ -44,6 +44,7 @@ import { StockRunningLowComponent } from './components/stock-running-low/stock-r
 import { AllSalesComponent } from './components/all-sales/all-sales.component';
 import { ListPurchasesComponent } from './components/list-purchases/list-purchases.component';
 import { ProductSalesReportComponent } from './components/product-sales-report/product-sales-report.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { ProductSalesReportComponent } from './components/product-sales-report/p
     AllSalesComponent,
     ListPurchasesComponent,
     ProductSalesReportComponent,
+    HomeComponent,
   ],
   imports: [
     NgAisModule.forRoot(),

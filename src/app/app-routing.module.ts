@@ -14,11 +14,13 @@ import { StockRunningLowComponent } from './components/stock-running-low/stock-r
 import { AllSalesComponent } from './components/all-sales/all-sales.component';
 import { ListPurchasesComponent } from './components/list-purchases/list-purchases.component';
 import { ProductSalesReportComponent } from './components/product-sales-report/product-sales-report.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'pos', component: PosComponent, canActivate:[authGuard, cashierGuard]},
   {path: '', component: HomeLayoutComponent, canActivate:[authGuard, adminGuard], children: [
+    {path: 'home', component: HomeComponent, canActivate:[authGuard, adminGuard]},
     {path: 'products/add', component: AddProductsComponent, canActivate:[authGuard, adminGuard]},
     {path: 'products/add-multiple', component: AddMultipleProductsComponent, canActivate:[authGuard, adminGuard]},
     {path: 'products/list', component: ListProductsComponent, canActivate:[authGuard, adminGuard]},
@@ -28,6 +30,7 @@ const routes: Routes = [
     {path: 'sales/credit-sales', component: CreditSalesComponent, canActivate:[authGuard, adminGuard]},
     {path: 'sales/all', component: AllSalesComponent, canActivate:[authGuard, adminGuard]},
     {path: 'sales/product-report', component: ProductSalesReportComponent, canActivate:[authGuard, adminGuard]},
+    {path: '', redirectTo: 'home', pathMatch: 'full'},
   ]},
   
 ];
