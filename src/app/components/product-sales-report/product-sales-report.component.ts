@@ -70,19 +70,24 @@ export class ProductSalesReportComponent {
     return this.productsDataSource.filteredData.reduce((total: number, product: any) => total + parseFloat(product.total_units), 0);
   }
 
+  // fetches the product sales report
   getProductSalesReport() {
-    this.salesService.productSalesReport(this.startDate.toISOString(), this.endDate.toISOString()).subscribe({
-      next: ((res: any) => {
-        this.productsDataSource.data = res.sums.product_sales_sums;
-      }),
-      error: (err => {
-        if (err.status == 403) {
-          this._snackBar.showErrorMessage("Session expired. Kindly login again.");
-        } else if (err.status == 400) {
-          this._snackBar.showErrorMessage(err.error.detail);
-        }
-      })
-    });
+    try {
+      this.salesService.productSalesReport(this.startDate.toISOString(), this.endDate.toISOString()).subscribe({
+        next: ((res: any) => {
+          this.productsDataSource.data = res.sums.product_sales_sums;
+        }),
+        error: (err => {
+          if (err.status == 403) {
+            this._snackBar.showErrorMessage("Session expired. Kindly login again.");
+          } else if (err.status == 400) {
+            this._snackBar.showErrorMessage(err.error.detail);
+          }
+        })
+      });
+    } catch {
+      this._snackBar.showErrorMessage("Invalid date format or missing dates.");
+    }
   }
 
   configureInitialDates() {
