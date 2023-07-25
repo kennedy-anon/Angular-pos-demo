@@ -6,14 +6,25 @@
   <mat-form-field appearance="outline" class="col-sm-3">
     <mat-label>Filter by Product Name</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input [(ngModel)]="product_name_filter">
+    <button *ngIf="product_name_filter" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilters()">
+        <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="col-sm-3">
-    <mat-label>Filter by Date</mat-label>
-    <input matInput [(ngModel)]="startDate" (dateChange)="filterByDate($event)" [matDatepicker]="picker">
+    <mat-label>From Date:</mat-label>
+    <input matInput [(ngModel)]="startDate" (dateChange)="setStartDate($event)" [matDatepicker]="startPicker">
     <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="col-sm-3">
+    <mat-label>To Date:</mat-label>
+    <input matInput [(ngModel)]="endDate" (dateChange)="setEndDate($event)" [matDatepicker]="endPicker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
   </mat-form-field>
 
   <div class="col-sm-3 py-2">

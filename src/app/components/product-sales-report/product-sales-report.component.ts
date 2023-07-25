@@ -14,6 +14,7 @@ import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service
 export class ProductSalesReportComponent {
 
   startDate !: string;
+  endDate !: string;
   product_name_filter !: string;
   defaultFilterPredicate !: (data: any, filter: string) => boolean;
   productsDataSource = new MatTableDataSource<any>([]);
@@ -31,19 +32,18 @@ export class ProductSalesReportComponent {
     this.productsDataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  // filtering by date
-  filterByDate(event: MatDatepickerInputEvent<Date>) {
+  // start date for filtering sales
+  setStartDate(event: MatDatepickerInputEvent<Date>) {
     if (event.value) {
-      this.setDateFilter(event.value);
+      this.startDate = (new Date(event.value)).toISOString();
     }
   }
 
-  setDateFilter(date: Date) {
-    this.productsDataSource.filterPredicate = (data: any) => {
-      const rowData = new Date(data.created_at);
-      return rowData >= date && rowData <= new Date(date.getTime() + 86400000);
+  // end date for filtering sales
+  setEndDate(event: MatDatepickerInputEvent<Date>) {
+    if (event.value) {
+      this.endDate = (new Date(event.value)).toISOString();
     }
-    this.productsDataSource.filter = date.toString();
   }
 
   clearFilters(){
