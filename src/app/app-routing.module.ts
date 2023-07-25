@@ -13,6 +13,7 @@ import { ListProductsComponent } from './components/list-products/list-products.
 import { StockRunningLowComponent } from './components/stock-running-low/stock-running-low.component';
 import { AllSalesComponent } from './components/all-sales/all-sales.component';
 import { ListPurchasesComponent } from './components/list-purchases/list-purchases.component';
+import { ProductSalesReportComponent } from './components/product-sales-report/product-sales-report.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
     {path: 'purchases/list', component: ListPurchasesComponent, canActivate:[authGuard, adminGuard]},
     {path: 'sales/credit-sales', component: CreditSalesComponent, canActivate:[authGuard, adminGuard]},
     {path: 'sales/all', component: AllSalesComponent, canActivate:[authGuard, adminGuard]},
+    {path: 'sales/product-report', component: ProductSalesReportComponent, canActivate:[authGuard, adminGuard]},
   ]},
   
 ];

@@ -40,4 +40,11 @@ export class SalesService {
     return this.http.get(`${this.apiUrl}sales/all/`, { headers })
       .pipe(map(res => res));
   }
+
+  // product sales report
+  productSalesReport(start_date: any, end_date: any) {
+    var headers = this.setHttpHeaders();
+    return this.http.get(`${this.apiUrl}reports/products-sales-sums/?start_date=${start_date}&end_date=${end_date}`, { headers })
+      .pipe(map(res => res));
+  }
 }
