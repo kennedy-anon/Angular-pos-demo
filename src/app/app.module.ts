@@ -46,6 +46,7 @@ import { ListPurchasesComponent } from './components/list-purchases/list-purchas
 import { ProductSalesReportComponent } from './components/product-sales-report/product-sales-report.component';
 import { HomeComponent } from './components/home/home.component';
 import { MatCardModule } from '@angular/material/card';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import { MatCardModule } from '@angular/material/card';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSortModule,
-    MatCardModule
+    MatCardModule,
+    CanvasJSAngularChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
