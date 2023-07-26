@@ -15,8 +15,34 @@ export class HomeComponent {
   startDate : Date = new Date();
   endDate : Date = new Date();
   last30DaysSales : any;
+  last30DaysSalesDataPoints : any[] = [];
+
+  last30DaysSalesChartOptions = {
+    theme: "light2",
+		animationEnabled: true,
+		zoomEnabled: true,
+		title: {
+			text: "Last 30 days Sales"
+		},
+    data: [
+      {
+        type: "line",
+        dataPoints: [this.last30DaysSalesDataPoints]
+      }
+    ]
+  }
 
   constructor(private salesService: SalesService, private authService: AuthService, private _snackBar: SnackBarCustomService) {}
+
+  // formating last30DaysSales to line graph datapoints
+  formatLast30DaysSales() {
+    this.last30DaysSalesDataPoints = this.last30DaysSales.map((sale: any) => ({
+      x: new Date(sale.date),
+      y: sale.total_sales
+    }));
+
+    this.last30DaysSalesChartOptions.data[0].dataPoints = this.last30DaysSalesDataPoints;
+  }
 
   // start date for filtering totals
   setStartDate(event: MatDatepickerInputEvent<Date>) {
@@ -56,6 +82,7 @@ export class HomeComponent {
       this.salesService.getLast30DaySales(end_date.toISOString()).subscribe({
         next: ((res: any) => {
           this.last30DaysSales = res.total_sales_by_day;
+          this.formatLast30DaysSales();
         }),
         error: (err => {
           this.handleFetchErrors(err);
