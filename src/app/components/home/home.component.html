@@ -1,1 +1,74 @@
-<p>home works!</p>
+<mat-toolbar>
+    Welcome {{ userInfo?.username | titlecase }},
+</mat-toolbar>
+
+<div class="container mt-3 row">
+    <mat-form-field appearance="outline" class="col-sm-3">
+        <mat-label>From Date:</mat-label>
+        <input matInput [(ngModel)]="startDate" (dateChange)="setStartDate($event)" [matDatepicker]="startPicker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline" class="col-sm-3">
+        <mat-label>To Date:</mat-label>
+        <input matInput [(ngModel)]="endDate" (dateChange)="setEndDate($event)" [matDatepicker]="endPicker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+    
+      <div class="col-sm-2 py-2">
+        <button mat-raised-button (click)="getAllTotals()" style="background: #1E1E1E; color: #D9D9D9;">Date Filter</button>
+      </div>
+    
+      <div class="col-sm-2 py-2">
+        <button mat-stroked-button (click)="resetFilterDates()" color="accent">Reset Dates</button>
+      </div>
+</div>
+
+<div class="container mt-3 row">
+    <div class="col-sm-4">
+        <mat-card>
+            <div class="d-flex">
+                <div class="col-sm-5 container p-auto">
+                    <mat-icon class="material-icons-outlined h-auto w-auto">shopping_cart</mat-icon>
+                </div>
+                <div class="col-sm-7 my-auto">
+                    <mat-card-subtitle>Total Purchase</mat-card-subtitle>
+                    <mat-card-title>{{ allTotals?.totalPurchases | currency:'KSh ':'code' }}</mat-card-title>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
+    <div class="col-sm-4">
+        <mat-card>
+            <div class="d-flex">
+                <div class="col-sm-5 container p-auto">
+                    <mat-icon class="material-icons-outlined h-auto w-auto">monetization_on</mat-icon>
+                </div>
+                <div class="col-sm-7 my-auto">
+                    <mat-card-subtitle>Total Sales</mat-card-subtitle>
+                    <mat-card-title>{{ allTotals?.total_sales | currency:'KSh ':'code' }}</mat-card-title>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
+    <div class="col-sm-4">
+        <mat-card>
+            <div class="d-flex">
+                <div class="col-sm-5 container p-auto">
+                    <mat-icon class="material-icons-outlined h-auto w-auto">local_atm</mat-icon>
+                </div>
+                <div class="col-sm-7 my-auto">
+                    <mat-card-subtitle>Total Credit Sales</mat-card-subtitle>
+                    <mat-card-title>{{ allTotals?.total_invoice_amount | currency:'KSh ':'code' }}</mat-card-title>
+                    <mat-card-subtitle>Paid: {{ allTotals?.total_invoice_paid | currency:'KSh ':'code' }}</mat-card-subtitle>
+                </div>
+            </div>
+        </mat-card>
+    </div>  
+</div>

@@ -45,6 +45,7 @@ import { AllSalesComponent } from './components/all-sales/all-sales.component';
 import { ListPurchasesComponent } from './components/list-purchases/list-purchases.component';
 import { ProductSalesReportComponent } from './components/product-sales-report/product-sales-report.component';
 import { HomeComponent } from './components/home/home.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { HomeComponent } from './components/home/home.component';
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSortModule
+    MatSortModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

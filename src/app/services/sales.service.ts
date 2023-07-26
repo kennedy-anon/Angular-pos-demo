@@ -47,4 +47,25 @@ export class SalesService {
     return this.http.get(`${this.apiUrl}reports/products-sales-sums/?start_date=${start_date}&end_date=${end_date}`, { headers })
       .pipe(map(res => res));
   }
+
+  // retrieving totals for sales, purchases and credit sales for given date ranges
+  getAllTotalsReport(start_date: any, end_date: any) {
+    var headers = this.setHttpHeaders();
+    return this.http.get(`${this.apiUrl}reports/totals/?start_date=${start_date}&end_date=${end_date}`, { headers })
+      .pipe(map(res => res));
+  }
+
+  // retrieving last 30 days sales
+  getLast30DaySales(end_date: any) {
+    var headers = this.setHttpHeaders();
+    return this.http.get(`${this.apiUrl}reports/sales/last-30days/?end_date=${end_date}`, { headers })
+      .pipe(map(res => res));
+  }
+
+  // retrieving monthly sales...last 12 months
+  getMonthlySales(end_date: any) {
+    var headers = this.setHttpHeaders();
+    return this.http.get(`${this.apiUrl}reports/sales/monthly/?end_date=${end_date}`, { headers })
+      .pipe(map(res => res));
+  }
 }
