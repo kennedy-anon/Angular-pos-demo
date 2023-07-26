@@ -14,6 +14,7 @@ export class HomeComponent {
   allTotals : any;
   startDate : Date = new Date();
   endDate : Date = new Date();
+  last30DaysSales : any;
 
   constructor(private salesService: SalesService, private authService: AuthService, private _snackBar: SnackBarCustomService) {}
 
@@ -39,11 +40,25 @@ export class HomeComponent {
           this.allTotals = res.totals;
         }),
         error: (err => {
-          if (err.status == 403) {
-            this._snackBar.showErrorMessage("Session expired. Kindly login again.");
-          } else if (err.status == 400) {
-            this._snackBar.showErrorMessage(err.error.detail);
-          }
+          this.handleFetchErrors(err);
+        })
+      });
+    } catch {
+      this._snackBar.showErrorMessage("Invalid date format or missing dates.");
+    }
+  }
+
+  // get sales for the last 30 days
+  getLast30DaysSales() {
+    const end_date = this.getTomorrowMidnight()
+
+    try {
+      this.salesService.getLast30DaySales(end_date.toISOString()).subscribe({
+        next: ((res: any) => {
+          this.last30DaysSales = res.total_sales_by_day;
+        }),
+        error: (err => {
+          this.handleFetchErrors(err);
         })
       });
     } catch {
@@ -68,6 +83,23 @@ export class HomeComponent {
     this.getAllTotals();
   }
 
+  // returns start of the next day
+  getTomorrowMidnight() {
+    const tomorrow = new Date()
+    tomorrow.setHours(0, 0, 0, 0);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow;
+  }
+
+  // handling fetch errors
+  handleFetchErrors(err: any) {
+    if (err.status == 403) {
+      this._snackBar.showErrorMessage("Session expired. Kindly login again.");
+    } else if (err.status == 400) {
+      this._snackBar.showErrorMessage(err.error.detail);
+    }
+  }
+
   ngOnInit(): void {
     const access_token = localStorage.getItem('access');
 
@@ -79,5 +111,6 @@ export class HomeComponent {
 
     this.configureInitialDates();
     this.getAllTotals();
+    this.getLast30DaysSales();
   }
 }
