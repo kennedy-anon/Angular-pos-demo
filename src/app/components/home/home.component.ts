@@ -69,7 +69,13 @@ export class HomeComponent {
         type: "line",
         dataPoints: [this.monthlySalesDataPoints]
       }
-    ]
+    ],
+    toolTip: {
+      contentFormatter: function (e: any) {
+        const date = (new Date(e.entries[0].dataPoint.x)).toLocaleString('en-US', { month: 'short', year: 'numeric' });
+        return "<span style='color: rgb(109, 120, 173);'>" + date + ": " + "</span>" + "<strong>" + e.entries[0].dataPoint.y.toLocaleString('en-US') + "</strong>";
+      }
+    }
   }
 
   constructor(private salesService: SalesService, private authService: AuthService, private _snackBar: SnackBarCustomService) {}
