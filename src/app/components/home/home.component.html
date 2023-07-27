@@ -2,7 +2,7 @@
     Welcome {{ userInfo?.username | titlecase }},
 </mat-toolbar>
 
-<div class="container mt-3 row">
+<div class="container my-3 row">
     <mat-form-field appearance="outline" class="col-sm-3">
         <mat-label>From Date:</mat-label>
         <input matInput [(ngModel)]="startDate" (dateChange)="setStartDate($event)" [matDatepicker]="startPicker">
@@ -29,12 +29,12 @@
 </div>
 
 <!-- all totals -->
-<div class="container mt-3 row">
+<div class="container my-3 row">
     <div class="col-sm-4">
         <mat-card>
             <div class="d-flex">
                 <div class="col-sm-5 container p-auto">
-                    <mat-icon class="material-icons-outlined h-auto w-auto">shopping_cart</mat-icon>
+                    <mat-icon class="material-icons-outlined h-auto w-auto" style="color: cornflowerblue;">shopping_cart</mat-icon>
                 </div>
                 <div class="col-sm-7 my-auto">
                     <mat-card-subtitle>Total Purchase</mat-card-subtitle>
@@ -48,7 +48,7 @@
         <mat-card>
             <div class="d-flex">
                 <div class="col-sm-5 container p-auto">
-                    <mat-icon class="material-icons-outlined h-auto w-auto">monetization_on</mat-icon>
+                    <mat-icon class="material-icons-outlined h-auto w-auto" style="color: green;">monetization_on</mat-icon>
                 </div>
                 <div class="col-sm-7 my-auto">
                     <mat-card-subtitle>Total Sales</mat-card-subtitle>
@@ -62,7 +62,7 @@
         <mat-card>
             <div class="d-flex">
                 <div class="col-sm-5 container p-auto">
-                    <mat-icon class="material-icons-outlined h-auto w-auto">local_atm</mat-icon>
+                    <mat-icon class="material-icons-outlined h-auto w-auto" style="color:chocolate;">local_atm</mat-icon>
                 </div>
                 <div class="col-sm-7 my-auto">
                     <mat-card-subtitle>Total Credit Sales</mat-card-subtitle>
@@ -75,15 +75,15 @@
 </div>
 
 <!-- last 30 days sales -->
-<div class="container my-3">
-    <mat-card-title>Last 30 days Sales</mat-card-title>
+<div class="container my-5">
+    <mat-card-title>Sales for last 30 days</mat-card-title>
     <div class="p-3 overflow-auto" *ngIf="last30DaysSalesShowChart && this.last30DaysSalesChartOptions.data[0].dataPoints.length != 0">
         <canvasjs-chart [options]="last30DaysSalesChartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart> 
     </div>
 </div>
 
 <!-- 12 month sales chart -->
-<div class="container my-3">
+<div class="container my-5">
     <mat-card-title>Sales for 12 months</mat-card-title>
     <div class="p-3 overflow-auto" *ngIf="monthlySalesShowChart && this.monthlySalesChartOptions.data[0].dataPoints.length != 0">
         <canvasjs-chart [options]="monthlySalesChartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart> 

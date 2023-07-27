@@ -32,7 +32,8 @@ export class HomeComponent {
 
       var suffix = suffixes[order];
       return "" + (e.value / Math.pow(1000, order)) + suffix;
-    }
+    },
+    title: "Total Sales (KSh)",
   }
 
   last30DaysSalesChartOptions = {

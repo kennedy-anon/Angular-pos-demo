@@ -5,3 +5,7 @@ mat-toolbar {
 .material-icons-outlined {
     font-size: 80px;
 }
+
+mat-card {
+    background-color:azure;
+}
