@@ -17,12 +17,26 @@ export class HomeComponent {
   last30DaysSales : any;
   last30DaysSalesDataPoints : any[] = [];
 
+  last30DaysSalesShowChart = false;
+
   last30DaysSalesChartOptions = {
     theme: "light2",
 		animationEnabled: true,
 		zoomEnabled: true,
 		title: {
-			text: "Last 30 days Sales"
+			text: ""
+		},
+    axisY: {
+			labelFormatter: (e: any) => {
+				var suffixes = ["", "K", "M", "B", "T"];
+ 
+				var order = Math.max(Math.floor(Math.log(e.value) / Math.log(1000)), 0);
+				if(order > suffixes.length - 1)
+					order = suffixes.length - 1;
+ 
+				var suffix = suffixes[order];
+				return "" + (e.value / Math.pow(1000, order)) + suffix;
+			}
 		},
     data: [
       {
@@ -38,10 +52,11 @@ export class HomeComponent {
   formatLast30DaysSales() {
     this.last30DaysSalesDataPoints = this.last30DaysSales.map((sale: any) => ({
       x: new Date(sale.date),
-      y: sale.total_sales
+      y: sale.total_sales !== null? sale.total_sales : 0
     }));
 
     this.last30DaysSalesChartOptions.data[0].dataPoints = this.last30DaysSalesDataPoints;
+    this.last30DaysSalesShowChart = true
   }
 
   // start date for filtering totals
