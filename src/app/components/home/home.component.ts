@@ -59,7 +59,9 @@ export class HomeComponent {
 			text: ""
 		},
     axisX: {
-      valueFormatString: "MMM YYYY" // Format the x-axis values to display month and year
+      intervalType: "month",
+      interval: 1,
+      valueFormatString: "MMM YYYY"
     },
     axisY: this.axisY,
     data: [
