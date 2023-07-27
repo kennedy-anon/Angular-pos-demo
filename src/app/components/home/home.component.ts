@@ -15,9 +15,25 @@ export class HomeComponent {
   startDate : Date = new Date();
   endDate : Date = new Date();
   last30DaysSales : any;
+  monthlySales : any
   last30DaysSalesDataPoints : any[] = [];
+  monthlySalesDataPoints : any[] = [];
 
   last30DaysSalesShowChart = false;
+  monthlySalesShowChart = false;
+
+  axisY = {
+    labelFormatter: (e: any) => {
+      var suffixes = ["", "K", "M", "B", "T"];
+
+      var order = Math.max(Math.floor(Math.log(e.value) / Math.log(1000)), 0);
+      if(order > suffixes.length - 1)
+        order = suffixes.length - 1;
+
+      var suffix = suffixes[order];
+      return "" + (e.value / Math.pow(1000, order)) + suffix;
+    }
+  }
 
   last30DaysSalesChartOptions = {
     theme: "light2",
@@ -26,22 +42,30 @@ export class HomeComponent {
 		title: {
 			text: ""
 		},
-    axisY: {
-			labelFormatter: (e: any) => {
-				var suffixes = ["", "K", "M", "B", "T"];
- 
-				var order = Math.max(Math.floor(Math.log(e.value) / Math.log(1000)), 0);
-				if(order > suffixes.length - 1)
-					order = suffixes.length - 1;
- 
-				var suffix = suffixes[order];
-				return "" + (e.value / Math.pow(1000, order)) + suffix;
-			}
-		},
+    axisY: this.axisY,
     data: [
       {
         type: "line",
         dataPoints: [this.last30DaysSalesDataPoints]
+      }
+    ]
+  }
+
+  monthlySalesChartOptions = {
+    theme: "light2",
+		animationEnabled: true,
+		zoomEnabled: true,
+		title: {
+			text: ""
+		},
+    axisX: {
+      valueFormatString: "MMM YYYY" // Format the x-axis values to display month and year
+    },
+    axisY: this.axisY,
+    data: [
+      {
+        type: "line",
+        dataPoints: [this.monthlySalesDataPoints]
       }
     ]
   }
@@ -57,6 +81,17 @@ export class HomeComponent {
 
     this.last30DaysSalesChartOptions.data[0].dataPoints = this.last30DaysSalesDataPoints;
     this.last30DaysSalesShowChart = true
+  }
+
+  // formatting monthly sales for line graph
+  formatMonthlySales() {
+    this.monthlySalesDataPoints = this.monthlySales.map((sale: any) => ({
+      x: new Date(sale.start_date),
+      y: sale.total_sales !== null? sale.total_sales : 0
+    }));
+
+    this.monthlySalesChartOptions.data[0].dataPoints = this.monthlySalesDataPoints;
+    this.monthlySalesShowChart = true;
   }
 
   // start date for filtering totals
@@ -98,6 +133,25 @@ export class HomeComponent {
         next: ((res: any) => {
           this.last30DaysSales = res.total_sales_by_day;
           this.formatLast30DaysSales();
+        }),
+        error: (err => {
+          this.handleFetchErrors(err);
+        })
+      });
+    } catch {
+      this._snackBar.showErrorMessage("Invalid date format or missing dates.");
+    }
+  }
+
+  // get monthly sales
+  getMonthlySales() {
+    const end_date = this.getTomorrowMidnight()
+
+    try {
+      this.salesService.getMonthlySales(end_date.toISOString()).subscribe({
+        next: ((res: any) => {
+          this.monthlySales = res.monthly_sales;
+          this.formatMonthlySales();
         }),
         error: (err => {
           this.handleFetchErrors(err);
@@ -154,5 +208,6 @@ export class HomeComponent {
     this.configureInitialDates();
     this.getAllTotals();
     this.getLast30DaysSales();
+    this.getMonthlySales();
   }
 }
