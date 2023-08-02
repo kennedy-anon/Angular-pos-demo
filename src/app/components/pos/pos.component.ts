@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -106,6 +107,32 @@ export class PosComponent {
     }
   }
 
+  // handle success save response
+  handleSuccessResponse(res : any) {
+    if (res instanceof HttpResponse) {
+      const contentType = res.headers.get('content-type');
+
+      if ((contentType === 'application/json') && (res.status == 201)) {
+        // credit sale saved
+      } else if ((contentType === 'application/pdf') && (res.status == 200)) {
+        const blob = new Blob([res.body], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+
+        iframe.addEventListener('load', () => {
+          iframe.contentWindow?.print();
+        });
+      }
+    }
+    
+    this._snackBar.showSuccessMessage('Sale added successfully.');
+    this.clearFields();
+  }
+
   // completing sale
   onSaleSubmit() {
     if (this.submitPOS) {
@@ -125,8 +152,7 @@ export class PosComponent {
       
       this.posService.saveSale(saleDetail).subscribe({
         next: (res => {
-          res.status == 201 ? this._snackBar.showSuccessMessage((res.body as any)?.detail): undefined;
-          this.clearFields();
+          this.handleSuccessResponse(res);
         }),
         error: (err => {
           if (err.status == 403) {

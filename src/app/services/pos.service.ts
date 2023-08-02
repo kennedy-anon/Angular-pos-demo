@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +21,9 @@ export class PosService {
   }
 
   // recording a sale
-  saveSale(sale: any) {
+  saveSale(sale: any): Observable<HttpResponse<any> | Blob> {
     var headers = this.setHttpHeaders();
-    return this.http.post(`${this.apiUrl}products/pos/`, sale, {headers: headers, observe: 'response'})
+    return this.http.post(`${this.apiUrl}products/pos/`, sale, {headers: headers, observe: 'response', responseType: 'blob'})
     .pipe(map(res => res));
   }
 }
