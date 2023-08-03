@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, of, throwError } from 'rxjs';
+import { Observable, catchError, map, of, throwError, retry  } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,7 @@ import { Observable, catchError, map, of, throwError } from 'rxjs';
 export class AuthService {
   apiUrl : string = "http://localhost:8000/api/";
   private userDetail: any;
+  private maxApiCall: number = 4;
 
   constructor(private http: HttpClient) { }
 
@@ -90,11 +91,9 @@ export class AuthService {
 
   // return the access groups
   accessGroupsService(): Observable<any> {
-    return this.getAccessGroups().pipe(map(res => {
-      return res;
-    }), catchError((err: any) => {
-      return this.accessGroupsService(); // loops a few times(after testing - 3 times) while waiting token to be refreshed
-    })
+    return this.getAccessGroups().pipe(
+      retry(this.maxApiCall - 1), // Retry the request (maxApiCall - 1) times while waiting token to be refreshed (after testing - 3 times)
+      catchError(() => of(({ groups: [] })))
     );
   }
 
