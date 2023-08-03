@@ -20,9 +20,17 @@ export class UsersService {
     return headers;
   }
 
+  // list all users
   listUsers() {
     var headers = this.setHttpHeaders();
     return this.http.get(`${this.apiUrl}auth/user/list/`, { headers })
       .pipe(map(res => res));
+  }
+
+  // add new user
+  addNewUser(user: any) {
+    var headers = this.setHttpHeaders();
+    return this.http.post(`${this.apiUrl}auth/user/create-new/`, user, {headers: headers, observe: 'response'})
+    .pipe(map(res => res));
   }
 }
