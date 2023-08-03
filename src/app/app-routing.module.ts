@@ -15,6 +15,7 @@ import { AllSalesComponent } from './components/all-sales/all-sales.component';
 import { ListPurchasesComponent } from './components/list-purchases/list-purchases.component';
 import { ProductSalesReportComponent } from './components/product-sales-report/product-sales-report.component';
 import { HomeComponent } from './components/home/home.component';
+import { ListUsersComponent } from './components/list-users/list-users.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
     {path: 'sales/credit-sales', component: CreditSalesComponent, canActivate:[authGuard, adminGuard]},
     {path: 'sales/all', component: AllSalesComponent, canActivate:[authGuard, adminGuard]},
     {path: 'sales/product-report', component: ProductSalesReportComponent, canActivate:[authGuard, adminGuard]},
+    {path: 'users', component: ListUsersComponent, canActivate:[authGuard, adminGuard]},
     {path: '', redirectTo: 'home', pathMatch: 'full'},
   ]},
   

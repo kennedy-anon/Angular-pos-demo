@@ -47,6 +47,7 @@ import { ProductSalesReportComponent } from './components/product-sales-report/p
 import { HomeComponent } from './components/home/home.component';
 import { MatCardModule } from '@angular/material/card';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { ListUsersComponent } from './components/list-users/list-users.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
     ListPurchasesComponent,
     ProductSalesReportComponent,
     HomeComponent,
+    ListUsersComponent,
   ],
   imports: [
     NgAisModule.forRoot(),
