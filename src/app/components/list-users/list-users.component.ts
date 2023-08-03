@@ -25,13 +25,11 @@ export class ListUsersComponent {
 
   // open dialog for new user
   openAddUser() {
-    const dialogRef = this.dialog.open(AddUserComponent, {
-
-    });
+    const dialogRef = this.dialog.open(AddUserComponent, {});
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined ){
-        // do nothing
+        this.fetchUsers();
       }
     });
   }

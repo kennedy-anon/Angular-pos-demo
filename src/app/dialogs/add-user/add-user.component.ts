@@ -26,7 +26,25 @@ export class AddUserComponent {
   }
 
   saveUser() {
-    // this.usersService.addNewUser(this.user).subscribe()
+    if (this.user.password !== this.user.confirm_password) {
+      this._snackBar.showErrorMessage("Passwords do not match.");
+      return;
+    }
+
+    // submitting form
+    this.usersService.addNewUser(this.user).subscribe({
+      next: ((res: any) => {
+        res.status == 201 ? this._snackBar.showSuccessMessage((res.body as any)?.detail): undefined;
+        this.dialogRef.close('created');
+      }),
+      error: (err => {
+        if (err.status == 403) {
+          this._snackBar.showErrorMessage("Session expired. Kindly login again.");
+        } else {
+          console.log(err);
+        }
+      })
+    });
   }
 
 }
