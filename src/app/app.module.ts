@@ -48,6 +48,7 @@ import { HomeComponent } from './components/home/home.component';
 import { MatCardModule } from '@angular/material/card';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ListUsersComponent } from './components/list-users/list-users.component';
+import { AddUserComponent } from './dialogs/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { ListUsersComponent } from './components/list-users/list-users.component
     ProductSalesReportComponent,
     HomeComponent,
     ListUsersComponent,
+    AddUserComponent,
   ],
   imports: [
     NgAisModule.forRoot(),

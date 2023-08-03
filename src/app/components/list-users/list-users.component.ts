@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AddUserComponent } from 'src/app/dialogs/add-user/add-user.component';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -19,7 +21,20 @@ export class ListUsersComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private usersService: UsersService, private _snackBar: SnackBarCustomService) {}
+  constructor(public dialog: MatDialog, private usersService: UsersService, private _snackBar: SnackBarCustomService) {}
+
+  // open dialog for new user
+  openAddUser() {
+    const dialogRef = this.dialog.open(AddUserComponent, {
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined ){
+        // do nothing
+      }
+    });
+  }
 
   // filter by ...names
   filterByName(event: Event) {
