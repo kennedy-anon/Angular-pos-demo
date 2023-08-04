@@ -49,4 +49,11 @@ export class UsersService {
     return this.http.post(`${this.apiUrl}auth/user/update/`, user, {headers: headers, observe: 'response'})
     .pipe(map(res => res));
   }
+
+  // save new password
+  saveNewPassword(newPassword: any, userId: number) {
+    var headers = this.setHttpHeaders();
+    return this.http.put(`${this.apiUrl}auth/user/${userId}/change-password/`, newPassword, {headers: headers, observe: 'response'})
+    .pipe(map(res => res));
+  }
 }
