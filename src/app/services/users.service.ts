@@ -56,4 +56,11 @@ export class UsersService {
     return this.http.put(`${this.apiUrl}auth/user/${userId}/change-password/`, newPassword, {headers: headers, observe: 'response'})
     .pipe(map(res => res));
   }
+
+  // delete user
+  deleteUser(user_id: number) {
+    var headers = this.setHttpHeaders();
+    return this.http.delete(`${this.apiUrl}auth/user/${user_id}/delete/`, {headers: headers, observe: 'response'})
+    .pipe(map(res => res));
+  }
 }

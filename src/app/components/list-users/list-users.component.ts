@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AddUserComponent } from 'src/app/dialogs/add-user/add-user.component';
+import { ConfirmDeleteComponent } from 'src/app/dialogs/confirm-delete/confirm-delete.component';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -39,6 +40,36 @@ export class ListUsersComponent {
         this.fetchUsers();
       }
     });
+  }
+
+  // open confirm delete dialog
+  confirmDelete(user: any) {
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+      data: {name: user.username},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'delete' ){
+        this.deleteUser(user);
+      }
+    });
+  }
+
+  // delete user
+  deleteUser(user: any){
+    this.usersService.deleteUser(user.id).subscribe({
+      next: (res => {
+        res.status == 200 ? this._snackBar.showSuccessMessage(`User '${user.username}' deleted successfully.`): undefined;
+        this.fetchUsers();
+      }),
+      error: (err => {
+        if (err.status == 403) {
+          this._snackBar.showErrorMessage("Session expired. Kindly login again.");
+        } else if (err.status == 404) {
+          this._snackBar.showErrorMessage(err.error.detail);
+        }
+      })
+    })
   }
 
   // filter by ...names
