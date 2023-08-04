@@ -25,6 +25,14 @@ export class AddUserComponent {
     this.dialogRef.close();
   }
 
+  handleSaveErrors(err: any) {
+    if (err.error.username) {
+      this._snackBar.showErrorMessage((err.error.username.join('\n')));
+    } else if (err.error.password) {
+      this._snackBar.showErrorMessage((err.error.password.join('\n')));
+    }
+  }
+
   saveUser() {
     if (this.user.password !== this.user.confirm_password) {
       this._snackBar.showErrorMessage("Passwords do not match.");
@@ -40,8 +48,8 @@ export class AddUserComponent {
       error: (err => {
         if (err.status == 403) {
           this._snackBar.showErrorMessage("Session expired. Kindly login again.");
-        } else {
-          console.log(err);
+        } else if (err.status == 400) {
+          this.handleSaveErrors(err);
         }
       })
     });
