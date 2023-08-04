@@ -73,14 +73,9 @@
 
             <mat-menu #actionMenu="matMenu" class="account-menu">
               <ng-template matMenuContent>
-                <button mat-menu-item>
+                <button mat-menu-item [routerLink]="['/users/edit']">
                   <mat-icon>edit</mat-icon>
                   <span>Edit</span>
-                </button>
-    
-                <button mat-menu-item>
-                  <mat-icon>history</mat-icon>
-                  <span>Purchase History</span>
                 </button>
 
                 <button mat-menu-item>

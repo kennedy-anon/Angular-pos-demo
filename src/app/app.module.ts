@@ -49,6 +49,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { AddUserComponent } from './dialogs/add-user/add-user.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { AddUserComponent } from './dialogs/add-user/add-user.component';
     HomeComponent,
     ListUsersComponent,
     AddUserComponent,
+    EditUserComponent,
   ],
   imports: [
     NgAisModule.forRoot(),

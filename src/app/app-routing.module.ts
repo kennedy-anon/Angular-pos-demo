@@ -16,6 +16,7 @@ import { ListPurchasesComponent } from './components/list-purchases/list-purchas
 import { ProductSalesReportComponent } from './components/product-sales-report/product-sales-report.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
     {path: 'sales/all', component: AllSalesComponent, canActivate:[authGuard, adminGuard]},
     {path: 'sales/product-report', component: ProductSalesReportComponent, canActivate:[authGuard, adminGuard]},
     {path: 'users', component: ListUsersComponent, canActivate:[authGuard, adminGuard]},
+    {path: 'users/edit', component: EditUserComponent, canActivate:[authGuard, adminGuard]},
     {path: '', redirectTo: 'home', pathMatch: 'full'},
   ]},
   

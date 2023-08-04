@@ -33,4 +33,11 @@ export class UsersService {
     return this.http.post(`${this.apiUrl}auth/user/create-new/`, user, {headers: headers, observe: 'response'})
     .pipe(map(res => res));
   }
+
+  // update user
+  updateUser(user: any) {
+    var headers = this.setHttpHeaders();
+    return this.http.post(`${this.apiUrl}auth/user/update/`, user, {headers: headers, observe: 'response'})
+    .pipe(map(res => res));
+  }
 }
