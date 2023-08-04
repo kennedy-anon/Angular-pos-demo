@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class EditUserComponent {
     Cashier: false
   }
 
-  constructor(private usersService: UsersService, private router: Router) {
+  constructor(private usersService: UsersService, private router: Router, private _snackBar: SnackBarCustomService) {
     this.userData = this.usersService.getUserData();
   }
 
@@ -39,7 +40,19 @@ export class EditUserComponent {
       remove_group_ids: permissions.remove_group_ids
     }
 
-    console.log(newUserData);
+    this.usersService.updateUser(newUserData).subscribe({
+      next: (res => {
+        res.status == 200 ? this._snackBar.showSuccessMessage((res.body as any)?.detail): undefined;
+        this.router.navigate(['/users']);
+      }),
+      error: (err => {
+        if (err.status == 403) {
+          this._snackBar.showErrorMessage("Session expired. Kindly login again.");
+        } else if (err.status == 400) {
+          this._snackBar.showErrorMessage(err.error.detail);
+        }
+      })
+    });
 
   }
 
