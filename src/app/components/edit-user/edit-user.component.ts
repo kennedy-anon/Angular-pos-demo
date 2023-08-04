@@ -23,11 +23,22 @@ export class EditUserComponent {
   constructor(private usersService: UsersService, private router: Router) {
     this.userData = this.usersService.getUserData();
   }
+
+  initializeFieldValues() {
+    this.user.first_name = this.userData?.first_name || '';
+    this.user.last_name = this.userData?.last_name || '';
+    this.user.username = this.userData?.username || '';
+    this.user.email = this.userData?.email || '';
+    this.user.is_active = this.userData?.is_active || false;
+    this.user.SystemAdmin = this.userData?.user_groups.some((group: { id: number, name: string }) => group.name === 'SystemAdmin');
+    this.user.Cashier = this.userData?.user_groups.some((group: { id: number, name: string }) => group.name === 'Cashier');
+  }
   
   ngOnInit(): void {
     if (this.userData === undefined) {
-      // this.router.navigate(['/users']);
+      this.router.navigate(['/users']);
     }
-    
+
+    this.initializeFieldValues();
   }
 }
