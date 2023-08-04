@@ -50,6 +50,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { AddUserComponent } from './dialogs/add-user/add-user.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     MatNativeDateModule,
     MatSortModule,
     MatCardModule,
-    CanvasJSAngularChartsModule
+    CanvasJSAngularChartsModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

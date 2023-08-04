@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -9,9 +10,24 @@ import { UsersService } from 'src/app/services/users.service';
 export class EditUserComponent {
 
   userData: any;
+  user: any = {
+    is_active: false,
+    username: '',
+    email: '',
+    first_name: '',
+    last_name: '',
+    SystemAdmin: false,
+    Cashier: false
+  }
 
-  constructor(private usersService: UsersService) {
+  constructor(private usersService: UsersService, private router: Router) {
     this.userData = this.usersService.getUserData();
   }
   
+  ngOnInit(): void {
+    if (this.userData === undefined) {
+      // this.router.navigate(['/users']);
+    }
+    
+  }
 }
