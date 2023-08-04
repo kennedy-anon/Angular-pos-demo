@@ -73,7 +73,7 @@
 
             <mat-menu #actionMenu="matMenu" class="account-menu">
               <ng-template matMenuContent>
-                <button mat-menu-item [routerLink]="['/users/edit']">
+                <button mat-menu-item (click)="passUserData(element)">
                   <mat-icon>edit</mat-icon>
                   <span>Edit</span>
                 </button>

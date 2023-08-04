@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { AddUserComponent } from 'src/app/dialogs/add-user/add-user.component';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -21,7 +22,13 @@ export class ListUsersComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private usersService: UsersService, private _snackBar: SnackBarCustomService) {}
+  constructor(public dialog: MatDialog, private usersService: UsersService, private _snackBar: SnackBarCustomService, private router: Router) {}
+
+  // pass user data for editing
+  passUserData(user: any) {
+    this.usersService.setUserData(user);
+    this.router.navigate(['/users/edit']);
+  }
 
   // open dialog for new user
   openAddUser() {

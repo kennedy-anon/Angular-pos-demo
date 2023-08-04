@@ -7,8 +7,17 @@ import { map } from 'rxjs';
 })
 export class UsersService {
   apiUrl : string = "http://localhost:8000/api/";
+  private userData: any; // passed for editing
 
   constructor(private http: HttpClient) { }
+
+  setUserData(user: any) {
+    this.userData = user;
+  }
+
+  getUserData() {
+    return this.userData;
+  }
 
   setHttpHeaders() {
     const token = localStorage.getItem('access');

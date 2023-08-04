@@ -8,6 +8,10 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class EditUserComponent {
 
-  constructor(private usersService: UsersService) {}
+  userData: any;
+
+  constructor(private usersService: UsersService) {
+    this.userData = this.usersService.getUserData();
+  }
   
 }
