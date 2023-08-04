@@ -24,7 +24,48 @@ export class EditUserComponent {
     this.userData = this.usersService.getUserData();
   }
 
+  // saving update
+  updateUser() {
+    const permissions = this.assignGroupIds();
+
+    const newUserData = {
+      user_id: this.user.user_id,
+      first_name: this.user.first_name,
+      last_name: this.user.last_name,
+      username: this.user.username,
+      email: this.user.email,
+      is_active: this.user.is_active,
+      group_ids: permissions.group_ids,
+      remove_group_ids: permissions.remove_group_ids
+    }
+
+    console.log(newUserData);
+
+  }
+
+  // assigning permission groups ids
+  assignGroupIds() {
+    const permissionGroups = [
+      { prop: 'SystemAdmin', id: 1 },
+      { prop: 'Cashier', id: 2 }
+    ];
+  
+    const group_ids: number[] = [];
+    const remove_group_ids: number[] = [];
+  
+    permissionGroups.forEach(permission => {
+      if (this.user[permission.prop]) {
+        group_ids.push(permission.id);
+      } else {
+        remove_group_ids.push(permission.id);
+      }
+    });
+
+    return {group_ids, remove_group_ids}
+  }
+
   initializeFieldValues() {
+    this.user.user_id = this.userData?.id || '';
     this.user.first_name = this.userData?.first_name || '';
     this.user.last_name = this.userData?.last_name || '';
     this.user.username = this.userData?.username || '';
