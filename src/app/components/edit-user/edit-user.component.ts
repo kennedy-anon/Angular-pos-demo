@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { NewPasswordComponent } from 'src/app/dialogs/new-password/new-password.component';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -21,8 +23,20 @@ export class EditUserComponent {
     Cashier: false
   }
 
-  constructor(private usersService: UsersService, private router: Router, private _snackBar: SnackBarCustomService) {
+  constructor(public dialog: MatDialog, private usersService: UsersService, private router: Router, private _snackBar: SnackBarCustomService) {
     this.userData = this.usersService.getUserData();
+  }
+
+  openNewPassword() {
+    const dialogRef = this.dialog.open(NewPasswordComponent, {
+      data: {user: this.user},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined ){
+        // do nothing
+      }
+    });
   }
 
   // saving update

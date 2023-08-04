@@ -51,6 +51,7 @@ import { ListUsersComponent } from './components/list-users/list-users.component
 import { AddUserComponent } from './dialogs/add-user/add-user.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NewPasswordComponent } from './dialogs/new-password/new-password.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ListUsersComponent,
     AddUserComponent,
     EditUserComponent,
+    NewPasswordComponent,
   ],
   imports: [
     NgAisModule.forRoot(),
