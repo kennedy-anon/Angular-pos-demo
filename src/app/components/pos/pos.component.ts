@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import algoliasearch from 'algoliasearch/lite';
 import { ConfirmClearComponent } from 'src/app/dialogs/confirm-clear/confirm-clear.component';
 import { CreditSaleComponent } from 'src/app/dialogs/credit-sale/credit-sale.component';
+import { UserAccountSettingComponent } from 'src/app/dialogs/user-account-setting/user-account-setting.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { PosService } from 'src/app/services/pos.service';
 import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
@@ -60,6 +61,18 @@ export class PosComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'clear' ){
         this.clearFields();
+      }
+    });
+  }
+
+  // user account setting
+  openAccountSetting() {
+    const dialogRef = this.dialog.open(UserAccountSettingComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined ){
+        // do nothing
       }
     });
   }
