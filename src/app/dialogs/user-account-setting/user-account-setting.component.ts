@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
+import { SnackBarCustomService } from 'src/app/services/snack-bar-custom.service';
 
 @Component({
   selector: 'app-user-account-setting',
@@ -8,12 +9,23 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./user-account-setting.component.css']
 })
 export class UserAccountSettingComponent {
-  userDetail : any;
+  userDetail : any = [];
+  displayedColumns = ['username', 'first_name', 'last_name', 'email'];
+  oldPassword !: string;
+  newPassword !: string;
+  confirmPassword !: string;
 
-  constructor(public dialogRef: MatDialogRef<UserAccountSettingComponent>, private authService: AuthService) {}
+  constructor(public dialogRef: MatDialogRef<UserAccountSettingComponent>, private _snackBar: SnackBarCustomService, private authService: AuthService) {}
 
   onCancelClick(): void {
     this.dialogRef.close();
+  }
+
+  saveNewPassword() {
+    if (this.newPassword !== this.confirmPassword) {
+      this._snackBar.showErrorMessage("Passwords do not match.");
+      return;
+    }
   }
 
   ngOnInit(): void {
@@ -21,8 +33,7 @@ export class UserAccountSettingComponent {
 
     if (access_token) {
       this.authService.getUserDetails(access_token).subscribe(res => {
-        this.userDetail = res;
-        console.log(this.userDetail);
+        this.userDetail = [...this.userDetail, res];
       })
     }
   }
