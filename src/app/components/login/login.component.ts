@@ -23,10 +23,26 @@ export class LoginComponent {
     this.authService.loginService(credentials).subscribe({
       next: (res => {
         this._snackBar.showSuccessMessage(res);
-        this.router.navigate(['']);
+        this.getAccessGroups();
       }),
       error: (err => {
         this._snackBar.showErrorMessage(err);
+      })
+    })
+  }
+
+  getAccessGroups() {
+    this.authService.getAccessGroups().subscribe({
+      next: ((res: any) => {
+        if (res.groups.includes('SystemAdmin')) {
+          this.router.navigate(['home']);
+        } else if (res.groups.includes('Cashier')) {
+          this.router.navigate(['/pos']);
+        } else {
+          this.router.navigate(['']);
+        }
+      }),
+      error: (err => {
       })
     })
   }
