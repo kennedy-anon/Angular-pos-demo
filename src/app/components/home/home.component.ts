@@ -119,8 +119,10 @@ export class HomeComponent {
 
   // get totals for sales, purchases and credit sales
   getAllTotals() {
+    const end_date = this.includeWholeDay(this.endDate);
+    
     try {
-      this.salesService.getAllTotalsReport(this.startDate.toISOString(), this.endDate.toISOString()).subscribe({
+      this.salesService.getAllTotalsReport(this.startDate.toISOString(), end_date.toISOString()).subscribe({
         next: ((res: any) => {
           this.allTotals = res.totals;
         }),
@@ -175,9 +177,6 @@ export class HomeComponent {
   configureInitialDates() {
     this.startDate.setHours(0, 0, 0, 0);
     this.endDate.setHours(0, 0, 0, 0);
-    const tomorrow  = new Date(this.endDate);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    this.endDate = tomorrow;
   }
 
   // reset filter dates for all totals
@@ -194,6 +193,13 @@ export class HomeComponent {
     tomorrow.setHours(0, 0, 0, 0);
     tomorrow.setDate(tomorrow.getDate() + 1);
     return tomorrow;
+  }
+
+  // sets to the start of next day to include all 24 hrs
+  includeWholeDay(day: Date) {
+    const end_date = new Date(day);
+    end_date.setDate(end_date.getDate() + 1);
+    return end_date;
   }
 
   // handling fetch errors
