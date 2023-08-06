@@ -72,8 +72,9 @@ export class ProductSalesReportComponent {
 
   // fetches the product sales report
   getProductSalesReport() {
+    const end_date = this.includeWholeDay(this.endDate);
     try {
-      this.salesService.productSalesReport(this.startDate.toISOString(), this.endDate.toISOString()).subscribe({
+      this.salesService.productSalesReport(this.startDate.toISOString(), end_date.toISOString()).subscribe({
         next: ((res: any) => {
           this.productsDataSource.data = res.sums.product_sales_sums;
         }),
@@ -93,9 +94,13 @@ export class ProductSalesReportComponent {
   configureInitialDates() {
     this.startDate.setHours(0, 0, 0, 0);
     this.endDate.setHours(0, 0, 0, 0);
-    const tomorrow  = new Date(this.endDate);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    this.endDate = tomorrow;
+  }
+
+  // sets end date to the start of next day to include all 24 hrs
+  includeWholeDay(day: Date) {
+    const end_date = new Date(day);
+    end_date.setDate(end_date.getDate() + 1);
+    return end_date;
   }
 
   ngOnInit(): void {

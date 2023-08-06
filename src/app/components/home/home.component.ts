@@ -120,7 +120,7 @@ export class HomeComponent {
   // get totals for sales, purchases and credit sales
   getAllTotals() {
     const end_date = this.includeWholeDay(this.endDate);
-    
+
     try {
       this.salesService.getAllTotalsReport(this.startDate.toISOString(), end_date.toISOString()).subscribe({
         next: ((res: any) => {
@@ -195,7 +195,7 @@ export class HomeComponent {
     return tomorrow;
   }
 
-  // sets to the start of next day to include all 24 hrs
+  // sets end date to the start of next day to include all 24 hrs
   includeWholeDay(day: Date) {
     const end_date = new Date(day);
     end_date.setDate(end_date.getDate() + 1);
