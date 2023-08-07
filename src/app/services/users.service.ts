@@ -50,7 +50,7 @@ export class UsersService {
     .pipe(map(res => res));
   }
 
-  // save new password
+  // save new password...for admin
   saveNewPassword(newPassword: any, userId: number) {
     var headers = this.setHttpHeaders();
     return this.http.put(`${this.apiUrl}auth/user/${userId}/change-password/`, newPassword, {headers: headers, observe: 'response'})
@@ -63,4 +63,17 @@ export class UsersService {
     return this.http.delete(`${this.apiUrl}auth/user/${user_id}/delete/`, {headers: headers, observe: 'response'})
     .pipe(map(res => res));
   }
+
+  // user changing his/ her own password
+  userChangePassword(old_password: string, new_password: string) {
+    const passwords = {
+      old_password: old_password,
+      new_password: new_password
+    }
+
+    var headers = this.setHttpHeaders();
+    return this.http.put(`${this.apiUrl}auth/user/change-my-password/`, passwords, {headers: headers, observe: 'response'})
+    .pipe(map(res => res));
+  }
+
 }
