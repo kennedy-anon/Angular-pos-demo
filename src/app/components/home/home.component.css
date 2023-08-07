@@ -9,3 +9,9 @@ mat-toolbar {
 mat-card {
     background-color:azure;
 }
+
+@media (max-width: 576px) {
+    .sm-margin {
+        margin-top: 1rem;
+    }
+}
