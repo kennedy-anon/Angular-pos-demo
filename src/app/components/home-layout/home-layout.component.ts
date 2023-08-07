@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,6 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./home-layout.component.css']
 })
 export class HomeLayoutComponent {
+  mobileQuery: MediaQueryList;
+
   title = 'denloy-POS';
   currentYear = new Date().getFullYear();
   showList: boolean = false;
@@ -15,7 +18,17 @@ export class HomeLayoutComponent {
   expandSales: boolean = false;
   userDetail : any;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  private _mobileQueryListener: () => void;
+
+  constructor(private authService: AuthService, private router: Router, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
+    this.mobileQuery = media.matchMedia('(max-width: 769px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
 
   // expand products navBar
   showProductList() {

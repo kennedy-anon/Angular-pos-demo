@@ -1,7 +1,7 @@
 <mat-drawer-container class="main-container">
 
     <!-- Navigation Bar -->
-    <mat-drawer #drawer mode="side" opened>
+    <mat-drawer #drawer [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="mobileQuery.matches ? false : true">
       <mat-toolbar color="primary">
         Denloy Investments
       </mat-toolbar>
