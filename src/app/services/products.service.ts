@@ -41,6 +41,17 @@ export class ProductsService {
     .pipe(map(res => res));
   }
 
+  // update opening stock
+  updateOpeningStock(available_units: number, product_id: number) {
+    const opening_stock = {
+      available_units: available_units
+    }
+
+    var headers = this.setHttpHeaders();
+    return this.http.put(`${this.apiUrl}products/${product_id}/update-stock/`, opening_stock, {headers: headers, observe: 'response'})
+    .pipe(map(res => res));
+  }
+
   // delete product
   deleteProduct(product_id: number) {
     var headers = this.setHttpHeaders();

@@ -69,6 +69,11 @@
                   <span>Purchase History</span>
                 </button>
 
+                <button (click)="openEditStock(element)" mat-menu-item>
+                  <mat-icon>inventory</mat-icon>
+                  <span>Edit opening stock</span>
+                </button>
+
                 <button (click)="confirmDeleteProduct(element)" mat-menu-item>
                     <mat-icon>delete</mat-icon>
                     <span>Delete</span>

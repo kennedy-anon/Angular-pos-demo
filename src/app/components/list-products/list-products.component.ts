@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDeleteComponent } from 'src/app/dialogs/confirm-delete/confirm-delete.component';
+import { EditOpeningStockComponent } from 'src/app/dialogs/edit-opening-stock/edit-opening-stock.component';
 import { EditProductDetailsComponent } from 'src/app/dialogs/edit-product-details/edit-product-details.component';
 import { ProductPurchaseHistoryComponent } from 'src/app/dialogs/product-purchase-history/product-purchase-history.component';
 import { ProductsService } from 'src/app/services/products.service';
@@ -28,6 +29,20 @@ export class ListProductsComponent {
   // open edit product detail
   openEditProduct(product: any) {
     const dialogRef = this.dialog.open(EditProductDetailsComponent, {
+      data: {product: product},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchProducts();
+      if (result != undefined ){
+        // do nothing
+      }
+    });
+  }
+
+  // open edit stock
+  openEditStock(product: any) {
+    const dialogRef = this.dialog.open(EditOpeningStockComponent, {
       data: {product: product},
     });
 
