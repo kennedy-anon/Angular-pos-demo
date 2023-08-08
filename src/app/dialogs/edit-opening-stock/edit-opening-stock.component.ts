@@ -22,7 +22,17 @@ export class EditOpeningStockComponent {
   }
 
   updateOpeningStock() {
-    
+    this.productsService.updateOpeningStock(this.product.available_units, this.product.product_id).subscribe({
+      next: (res => {
+        res.status == 200 ? this._snackBar.showSuccessMessage((res.body as any)?.detail) : undefined;
+        this.dialogRef.close('success');
+      }),
+      error: (err => {
+        if (err.status == 403) {
+          this._snackBar.showErrorMessage("Session expired. Kindly login again.");
+        }
+      })
+    });
   }
 
 }
