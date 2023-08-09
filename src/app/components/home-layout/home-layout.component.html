@@ -112,7 +112,7 @@
 
         <mat-menu #account="matMenu" class="account-menu">
           <ng-template matMenuContent>
-            <button mat-menu-item>
+            <button mat-menu-item [routerLink]="['users']">
               <mat-icon>manage_accounts</mat-icon>
               <span>Account</span>
             </button>
