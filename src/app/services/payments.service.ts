@@ -6,7 +6,8 @@ import { map } from 'rxjs';
   providedIn: 'root'
 })
 export class PaymentsService {
-  apiUrl : string = "http://localhost:8000/api/";
+  // apiUrl : string = "http://localhost:8000/api/";
+  apiUrl : string = "https://kenz.pythonanywhere.com/api/";
 
   constructor(private http: HttpClient) { }
 

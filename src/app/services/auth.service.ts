@@ -6,7 +6,8 @@ import { Observable, catchError, map, of, throwError, retry  } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl : string = "http://localhost:8000/api/";
+  // apiUrl : string = "http://localhost:8000/api/";
+  apiUrl : string = "https://kenz.pythonanywhere.com/api/";
   private userDetail: any;
   private maxApiCall: number = 4;
 
