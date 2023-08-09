@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HomeLayoutComponent {
   mobileQuery: MediaQueryList;
 
-  title = 'denloy-POS';
+  title = 'Denloy-POS';
   currentYear = new Date().getFullYear();
   showList: boolean = false;
   expandPurchase: boolean = false;
